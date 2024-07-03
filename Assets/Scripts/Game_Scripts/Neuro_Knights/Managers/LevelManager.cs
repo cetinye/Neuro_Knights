@@ -7,6 +7,7 @@ namespace Neuro_Knights
 	public class LevelManager : MonoBehaviour
 	{
 		public static LevelManager instance;
+		public Camera mainCamera;
 
 		[Header("Player Variables")]
 		[SerializeField] private Player player;
@@ -38,6 +39,11 @@ namespace Neuro_Knights
 		public List<Enemy> GetSpawnedEnemies()
 		{
 			return enemySpawner.GetSpawnedEnemies();
+		}
+
+		public EnemySpawner GetEnemySpawner()
+		{
+			return enemySpawner;
 		}
 	}
 }

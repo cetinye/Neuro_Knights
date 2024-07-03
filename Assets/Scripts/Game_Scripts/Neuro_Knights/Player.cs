@@ -6,10 +6,10 @@ namespace Neuro_Knights
 {
 	public class Player : MonoBehaviour
 	{
-		public float speed;
-		public VariableJoystick variableJoystick;
-		public Rigidbody2D rb;
-
+		[SerializeField] private Weapon weapon;
+		[SerializeField] private float speed;
+		[SerializeField] private VariableJoystick variableJoystick;
+		[SerializeField] private Rigidbody2D rb;
 		[SerializeField] private float xBound;
 		[SerializeField] private float yBound;
 		private LevelManager levelManager;
@@ -22,7 +22,12 @@ namespace Neuro_Knights
 		public void Update()
 		{
 			PlayerMovement();
+
+			if (levelManager.GetSpawnedEnemies().Count == 0)
+				return;
+
 			LookAtEnemy();
+			Shoot();
 		}
 
 		private void PlayerMovement()
@@ -38,9 +43,6 @@ namespace Neuro_Knights
 
 		private void LookAtEnemy()
 		{
-			if (levelManager.GetSpawnedEnemies().Count == 0)
-				return;
-
 			Vector2 closestEnemyPos = GetClosestEnemy().transform.position;
 			Vector2 targetPos;
 
@@ -55,7 +57,7 @@ namespace Neuro_Knights
 			return transform.position;
 		}
 
-		private Enemy GetClosestEnemy()
+		public Enemy GetClosestEnemy()
 		{
 			List<Enemy> enemies = levelManager.GetSpawnedEnemies();
 			float minDistance = 10000;
@@ -63,7 +65,7 @@ namespace Neuro_Knights
 
 			foreach (Enemy enemy in enemies)
 			{
-				enemy.GetComponent<SpriteRenderer>().color = Color.white;
+				// enemy.GetComponent<SpriteRenderer>().color = Color.white;
 				float distance = enemy.GetDistanceToPlayer();
 				if (distance < minDistance)
 				{
@@ -72,8 +74,21 @@ namespace Neuro_Knights
 				}
 			}
 
-			closestEnemy.GetComponent<SpriteRenderer>().color = Color.red;
+			// closestEnemy.GetComponent<SpriteRenderer>().color = Color.red;
 			return closestEnemy;
+		}
+
+		private void Shoot()
+		{
+			Enemy closestEnemy = GetClosestEnemy();
+
+			if (closestEnemy != null)
+			{
+				if (closestEnemy.GetDistanceToPlayer() <= weapon.range)
+				{
+					weapon.Fire();
+				}
+			}
 		}
 	}
 }
