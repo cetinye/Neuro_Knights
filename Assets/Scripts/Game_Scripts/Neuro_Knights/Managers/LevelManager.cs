@@ -10,6 +10,11 @@ namespace Neuro_Knights
 		public UIManager uiManager;
 		public Camera mainCamera;
 
+		[Header("Level Variables")]
+		[SerializeField] private int levelId;
+		[SerializeField] private LevelSO levelSO;
+		[SerializeField] private List<LevelSO> levels = new List<LevelSO>();
+
 		[Header("Time Variables")]
 		[SerializeField] private float levelTime;
 		private float levelTimer;
@@ -50,9 +55,18 @@ namespace Neuro_Knights
 
 		void StartGame()
 		{
+			AssignLevelVariables();
+
 			levelTimer = levelTime;
 			GameStateManager.SetGameState(GameState.Playing);
 			enemySpawner.SpawnEnemies(spawnInterval);
+		}
+
+		private void AssignLevelVariables()
+		{
+			levelSO = levels[levelId];
+
+			levelTime = levelSO.levelTime;
 		}
 
 		private void OnStateChange()
