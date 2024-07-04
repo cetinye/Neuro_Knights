@@ -12,6 +12,7 @@ namespace Neuro_Knights
 		[SerializeField] private float health;
 		[SerializeField] private float maxHealth;
 		[SerializeField] private HealthBar healthBar;
+		[SerializeField] private Target target;
 
 		private LevelManager levelManager;
 		private Player player;
@@ -74,6 +75,7 @@ namespace Neuro_Knights
 
 			if (health == 0)
 			{
+				target.enabled = false;
 				levelManager.GetEnemySpawner().RemoveEnemy(this);
 				Destroy(gameObject);
 			}
