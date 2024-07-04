@@ -12,6 +12,7 @@ namespace Neuro_Knights
 		{
 			if (isReadyToShoot)
 			{
+				PlayFireSound();
 				MuzzleFlash();
 				isReadyToShoot = false;
 				SpawnBullet();
@@ -37,6 +38,12 @@ namespace Neuro_Knights
 			spawnedParticle.transform.localPosition = Vector3.zero;
 			spawnedParticle.transform.rotation = Quaternion.Euler(new Vector3(-90f, 0f, 0f));
 			spawnedParticle.Play();
+		}
+
+		private void PlayFireSound()
+		{
+			AudioManager.instance.GetSoundSource(SoundType.PistolFire).pitch = 1 + Random.Range(-0.1f, 0.1f);
+			AudioManager.instance.PlayOneShot(SoundType.PistolFire);
 		}
 	}
 }
