@@ -9,6 +9,7 @@ namespace Neuro_Knights
 	{
 		[SerializeField] private TMP_Text killedText;
 		[SerializeField] private TMP_Text levelTimeText;
+		[SerializeField] private GameObject upgradePanel;
 
 		public void UpdateKilledText(int value)
 		{
@@ -18,6 +19,11 @@ namespace Neuro_Knights
 		public void UpdateLevelTime(float value)
 		{
 			levelTimeText.text = "Time Left: " + value.ToString("F0");
+		}
+
+		public void SetUpgradePanel(bool state)
+		{
+			upgradePanel.SetActive(state);
 		}
 	}
 }

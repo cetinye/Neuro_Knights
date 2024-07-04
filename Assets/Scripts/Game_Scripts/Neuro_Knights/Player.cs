@@ -21,6 +21,8 @@ namespace Neuro_Knights
 
 		public void Update()
 		{
+			if (GameStateManager.GetGameState() != GameState.Playing) return;
+
 			PlayerMovement();
 
 			if (levelManager.GetSpawnedEnemies().Count == 0)

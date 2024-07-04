@@ -24,6 +24,8 @@ namespace Neuro_Knights
 
 		private void SpawnEnemy()
 		{
+			if (GameStateManager.GetGameState() != GameState.Playing) return;
+
 			Enemy enemy = Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Count)], GetSpawnPosition(), Quaternion.identity);
 			enemy.transform.position = new Vector3(enemy.transform.position.x, enemy.transform.position.y, -0.004f);
 			spawnedEnemies.Add(enemy);

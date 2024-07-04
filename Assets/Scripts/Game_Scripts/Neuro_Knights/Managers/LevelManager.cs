@@ -26,6 +26,13 @@ namespace Neuro_Knights
 		void Awake()
 		{
 			instance = this;
+
+			GameStateManager.OnGameStateChanged += OnStateChange;
+		}
+
+		void OnDestroy()
+		{
+			GameStateManager.OnGameStateChanged -= OnStateChange;
 		}
 
 		void Start()
@@ -51,8 +58,27 @@ namespace Neuro_Knights
 		void StartGame()
 		{
 			levelTimer = levelTime;
-			isLevelTimerOn = true;
+			GameStateManager.SetGameState(GameState.Playing);
 			enemySpawner.SpawnEnemies(spawnInterval);
+		}
+
+		private void OnStateChange()
+		{
+			switch (GameStateManager.GetGameState())
+			{
+				case GameState.Idle:
+					break;
+
+				case GameState.Playing:
+					uiManager.SetUpgradePanel(false);
+					isLevelTimerOn = true;
+					break;
+
+				case GameState.Upgrade:
+					isLevelTimerOn = false;
+					uiManager.SetUpgradePanel(true);
+					break;
+			}
 		}
 
 		public Player GetPlayer()
@@ -74,6 +100,11 @@ namespace Neuro_Knights
 		{
 			killedCount++;
 			uiManager.UpdateKilledText(killedCount);
+
+			if (killedCount % 10 == 0)
+			{
+				GameStateManager.SetGameState(GameState.Upgrade);
+			}
 		}
 	}
 }

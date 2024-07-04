@@ -35,7 +35,7 @@ namespace Neuro_Knights
 
 		void Update()
 		{
-			if (isFollowing && health > 0)
+			if (isFollowing && health > 0 && GameStateManager.GetGameState() == GameState.Playing)
 			{
 				FollowPlayer();
 				distanceToPlayer = GetDistanceToPlayer();
