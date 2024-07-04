@@ -796,10 +796,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiManager: {fileID: 805243081}
   mainCamera: {fileID: 519420031}
+  levelId: 0
+  levelSO: {fileID: 0}
+  levels:
+  - {fileID: 11400000, guid: 027b51cbca4f94c41b8159d112c85d5e, type: 2}
   levelTime: 120
   player: {fileID: 1677222439}
   enemySpawner: {fileID: 1187309900}
   spawnInterval: 3
+  isFlashable: 1
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -914,6 +919,7 @@ MonoBehaviour:
   killedText: {fileID: 942007339}
   levelTimeText: {fileID: 1756070092}
   upgradePanel: {fileID: 559557533}
+  flashInterval: 0.5
 --- !u!4 &805243082
 Transform:
   m_ObjectHideFlags: 0
