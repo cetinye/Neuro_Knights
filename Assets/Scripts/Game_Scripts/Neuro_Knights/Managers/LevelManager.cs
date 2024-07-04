@@ -23,6 +23,9 @@ namespace Neuro_Knights
 		[SerializeField] private EnemySpawner enemySpawner;
 		[SerializeField] private float spawnInterval;
 
+		[Header("Flash Interval")]
+		[SerializeField] private bool isFlashable = true;
+
 		void Awake()
 		{
 			instance = this;
@@ -42,17 +45,7 @@ namespace Neuro_Knights
 
 		void Update()
 		{
-			if (isLevelTimerOn)
-			{
-				levelTimer -= Time.deltaTime;
-				uiManager.UpdateLevelTime(levelTimer);
-			}
-
-			if (levelTimer < 0)
-			{
-				isLevelTimerOn = false;
-				uiManager.UpdateLevelTime(0);
-			}
+			LevelTimer();
 		}
 
 		void StartGame()
@@ -78,6 +71,28 @@ namespace Neuro_Knights
 					isLevelTimerOn = false;
 					uiManager.SetUpgradePanel(true);
 					break;
+			}
+		}
+
+		private void LevelTimer()
+		{
+			if (isLevelTimerOn)
+			{
+				levelTimer -= Time.deltaTime;
+				uiManager.UpdateLevelTime(levelTimer);
+			}
+
+			if (levelTimer < 0)
+			{
+				isLevelTimerOn = false;
+				uiManager.UpdateLevelTime(0);
+			}
+
+			if (levelTimer <= 5.2f && isFlashable)
+			{
+				isFlashable = false;
+				// GameManager.instance.PlayFx("Countdown", 0.7f, 1f);
+				uiManager.FlashRed();
 			}
 		}
 
