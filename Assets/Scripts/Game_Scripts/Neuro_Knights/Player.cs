@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 namespace Neuro_Knights
@@ -51,7 +52,8 @@ namespace Neuro_Knights
 			targetPos.x = closestEnemyPos.x - transform.position.x;
 			targetPos.y = closestEnemyPos.y - transform.position.y;
 			float angle = Mathf.Atan2(targetPos.y, targetPos.x) * Mathf.Rad2Deg;
-			transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+			// transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+			transform.DORotateQuaternion(Quaternion.Euler(new Vector3(0, 0, angle)), 0.5f);
 		}
 
 		public Vector2 GetPlayerPosition()
