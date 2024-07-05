@@ -89,6 +89,7 @@ namespace Neuro_Knights
     public enum SoundType
     {
         PistolFire,
+        TrajectoryHit,
     }
 
     [System.Serializable]

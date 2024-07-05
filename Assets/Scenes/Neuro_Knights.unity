@@ -1580,6 +1580,11 @@ MonoBehaviour:
     volume: 0.3
     loop: 0
     source: {fileID: 0}
+  - name: 1
+    clip: {fileID: 8300000, guid: 62c0d9c2f2ce01d4b98ebb5603a1f906, type: 3}
+    volume: 0.4
+    loop: 0
+    source: {fileID: 0}
 --- !u!1001 &1410184652
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -21,6 +21,7 @@ namespace Neuro_Knights
 			if (other.TryGetComponent(out Player player))
 			{
 				// player.TakeDamage(damage);
+				AudioManager.instance.PlayAt(SoundType.TrajectoryHit, 0.075f);
 				Destroy(gameObject);
 			}
 		}
