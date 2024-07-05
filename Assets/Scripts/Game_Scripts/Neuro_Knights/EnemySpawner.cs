@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 namespace Neuro_Knights
@@ -9,6 +10,7 @@ namespace Neuro_Knights
 		[SerializeField] private List<Enemy> enemyPrefabs = new List<Enemy>();
 		[SerializeField] private float range;
 		[SerializeField] private List<Enemy> spawnedEnemies = new List<Enemy>();
+		[SerializeField] private CrossMark crossMark;
 
 		private LevelManager levelManager;
 
@@ -26,7 +28,18 @@ namespace Neuro_Knights
 		{
 			if (GameStateManager.GetGameState() != GameState.Playing) return;
 
-			Enemy enemy = Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Count)], GetSpawnPosition(), Quaternion.identity);
+			StartCoroutine(SpawnEnemyRoutine());
+		}
+
+		IEnumerator SpawnEnemyRoutine()
+		{
+			Vector2 spawnPosition = GetSpawnPosition();
+			CrossMark spawnedCross = SpawnCrossMark(spawnPosition);
+			yield return spawnedCross.AnimSequence().WaitForCompletion();
+
+			if (spawnedCross.IsInterrupted()) yield break;
+
+			Enemy enemy = Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Count)], spawnPosition, Quaternion.identity);
 			enemy.transform.position = new Vector3(enemy.transform.position.x, enemy.transform.position.y, -0.004f);
 			spawnedEnemies.Add(enemy);
 		}
@@ -62,6 +75,11 @@ namespace Neuro_Knights
 		{
 			spawnedEnemies.Remove(enemy);
 			levelManager.EnemyKilled();
+		}
+
+		public CrossMark SpawnCrossMark(Vector3 position)
+		{
+			return Instantiate(crossMark, position, Quaternion.identity);
 		}
 	}
 }
