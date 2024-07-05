@@ -7,17 +7,18 @@ namespace Neuro_Knights
 {
 	public class Enemy : MonoBehaviour
 	{
-		[SerializeField] private float speed;
-		[SerializeField] private float distanceToPlayer;
-		[SerializeField] private float health;
-		[SerializeField] private float maxHealth;
-		[SerializeField] private HealthBar healthBar;
-		[SerializeField] private Target target;
+		public float speed;
+		public float distanceToPlayer;
+		public float health;
+		public float maxHealth;
+		public HealthBar healthBar;
+		public Target target;
 
-		private LevelManager levelManager;
-		private Player player;
-		private SpriteRenderer spriteRenderer;
-		private bool isFollowing = false;
+		public LevelManager levelManager;
+		public Player player;
+		public SpriteRenderer spriteRenderer;
+		public bool isFollowing = false;
+
 
 		void Awake()
 		{
@@ -34,23 +35,12 @@ namespace Neuro_Knights
 			isFollowing = true;
 		}
 
-		void Update()
+		public virtual void FollowPlayer()
 		{
-			if (isFollowing && health > 0 && GameStateManager.GetGameState() == GameState.Playing)
-			{
-				FollowPlayer();
-				distanceToPlayer = GetDistanceToPlayer();
-			}
+
 		}
 
-		private void FollowPlayer()
-		{
-			// transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
-			transform.position = Vector3.MoveTowards(transform.position, new Vector3(player.transform.position.x, player.transform.position.y, -0.004f), speed * Time.deltaTime);
-			LookAtPlayer();
-		}
-
-		private void LookAtPlayer()
+		public void LookAtPlayer()
 		{
 			Vector2 targetPos;
 
@@ -81,7 +71,7 @@ namespace Neuro_Knights
 			}
 		}
 
-		private void PlayBloodParticle()
+		public void PlayBloodParticle()
 		{
 			// ParticleSystem particleSystem = Instantiate(bloodParticle, transform.position, Quaternion.identity, transform);
 

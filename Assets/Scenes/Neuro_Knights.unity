@@ -1495,8 +1495,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefabs:
-  - {fileID: 3784587642455509410, guid: 32b10cd0e91732146be3a70190f51d54, type: 3}
-  - {fileID: 5875473246795817858, guid: dbd7caad944ed9f4ca17ed8a34dda66b, type: 3}
+  - {fileID: -8459973042575039106, guid: bed2b855ad02a3246a6316560986c3c8, type: 3}
   range: 10
   spawnedEnemies: []
   crossMark: {fileID: -3159227144536123116, guid: 21666c2d336ab394397d8c31bd656d17, type: 3}
@@ -1578,7 +1577,7 @@ MonoBehaviour:
   sounds:
   - name: 0
     clip: {fileID: 8300000, guid: 321feb9f51af885488e5ed433aecd467, type: 3}
-    volume: 1
+    volume: 0.3
     loop: 0
     source: {fileID: 0}
 --- !u!1001 &1410184652
@@ -2581,6 +2580,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1677222437}
     m_Modifications:
+    - target: {fileID: 1540430005723377348, guid: 3aab635933fd89e4cad9b42763de4d02, type: 3}
+      propertyPath: damage
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2234438412656363719, guid: 3aab635933fd89e4cad9b42763de4d02, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.244

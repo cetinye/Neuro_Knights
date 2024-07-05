@@ -11,6 +11,7 @@ namespace Neuro_Knights
 		public float fireRate;
 		public ParticleSystem muzzleFlash;
 		public Bullet bullet;
+		public Trajectory trajectory;
 
 		public virtual void Fire()
 		{

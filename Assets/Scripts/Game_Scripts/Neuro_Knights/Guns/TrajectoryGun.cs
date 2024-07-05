@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Neuro_Knights
 {
-	public class Pistol : Weapon
+	public class TrajectoryGun : Weapon
 	{
 		public bool isReadyToShoot = true;
 
@@ -17,19 +17,27 @@ namespace Neuro_Knights
 		{
 			if (isReadyToShoot)
 			{
-				PlayFireSound();
-				MuzzleFlash();
+				// PlayFireSound();
+				// MuzzleFlash();
 				isReadyToShoot = false;
-				SpawnBullet();
+				SpawnTrajectory();
 				Invoke(nameof(ReadyToShoot), fireRate);
 			}
 		}
 
-		public void SpawnBullet()
+		public void SpawnTrajectory()
 		{
-			Bullet spawnedBullet = Instantiate(bullet, new Vector3(transform.position.x, transform.position.y, -1f), Quaternion.identity, transform);
-			spawnedBullet.SetDamage(damage);
-			spawnedBullet.SetTarget(LevelManager.instance.GetPlayer().GetClosestEnemy());
+			Trajectory spawnedTrajectory = Instantiate(trajectory, new Vector3(transform.position.x, transform.position.y, -1f), Quaternion.identity, null);
+			spawnedTrajectory.SetDamage(damage);
+			spawnedTrajectory.SetDirection(GetDirection(), transform.position);
+		}
+
+		public Vector2 GetDirection()
+		{
+			Vector2 direction = new Vector2(LevelManager.instance.GetPlayer().GetPlayerPosition().x - transform.position.x,
+				LevelManager.instance.GetPlayer().GetPlayerPosition().y - transform.position.y);
+
+			return direction;
 		}
 
 		public void ReadyToShoot()
