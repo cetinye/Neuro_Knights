@@ -7,10 +7,38 @@ namespace Neuro_Knights
 	public class Pistol : Weapon
 	{
 		public bool isReadyToShoot = true;
+		private LevelManager levelManager;
 
 		void Awake()
 		{
 			isReadyToShoot = true;
+		}
+
+		void Start()
+		{
+			levelManager = LevelManager.instance;
+		}
+
+		void Update()
+		{
+			if (levelManager.GetSpawnedEnemies().Count == 0)
+				return;
+
+			LookAtEnemy();
+			Shoot();
+		}
+
+		private void Shoot()
+		{
+			Enemy closestEnemy = GetClosestEnemy();
+
+			if (closestEnemy != null)
+			{
+				if (closestEnemy.GetDistanceToPlayer() <= range)
+				{
+					Fire();
+				}
+			}
 		}
 
 		public override void Fire()

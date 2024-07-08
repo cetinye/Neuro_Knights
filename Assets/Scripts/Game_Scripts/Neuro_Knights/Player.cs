@@ -26,11 +26,11 @@ namespace Neuro_Knights
 
 			PlayerMovement();
 
-			if (levelManager.GetSpawnedEnemies().Count == 0)
-				return;
+			// if (levelManager.GetSpawnedEnemies().Count == 0)
+			// 	return;
 
-			LookAtEnemy();
-			Shoot();
+			// LookAtEnemy();
+			// Shoot();
 		}
 
 		private void PlayerMovement()

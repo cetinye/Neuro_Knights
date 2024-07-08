@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 namespace Neuro_Knights
@@ -16,6 +17,39 @@ namespace Neuro_Knights
 		public virtual void Fire()
 		{
 
+		}
+
+		public void LookAtEnemy()
+		{
+			Vector2 closestEnemyPos = GetClosestEnemy().transform.position;
+			Vector2 targetPos;
+
+			targetPos.x = closestEnemyPos.x - transform.position.x;
+			targetPos.y = closestEnemyPos.y - transform.position.y;
+			float angle = Mathf.Atan2(targetPos.y, targetPos.x) * Mathf.Rad2Deg;
+			// transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+			transform.DORotateQuaternion(Quaternion.Euler(new Vector3(0, 0, angle)), 0.5f);
+		}
+
+		public Enemy GetClosestEnemy()
+		{
+			List<Enemy> enemies = LevelManager.instance.GetSpawnedEnemies();
+			float minDistance = 10000;
+			Enemy closestEnemy = null;
+
+			foreach (Enemy enemy in enemies)
+			{
+				// enemy.GetComponent<SpriteRenderer>().color = Color.white;
+				float distance = enemy.GetDistanceToPlayer();
+				if (distance < minDistance)
+				{
+					minDistance = distance;
+					closestEnemy = enemy;
+				}
+			}
+
+			// closestEnemy.GetComponent<SpriteRenderer>().color = Color.red;
+			return closestEnemy;
 		}
 	}
 }
