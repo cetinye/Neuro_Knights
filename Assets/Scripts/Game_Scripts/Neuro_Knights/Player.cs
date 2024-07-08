@@ -7,7 +7,11 @@ namespace Neuro_Knights
 {
 	public class Player : MonoBehaviour
 	{
-		[SerializeField] private Weapon weapon;
+		[SerializeField] private float radius;
+		[SerializeField] private int gunAmount;
+		[SerializeField] private List<Weapon> weapons;
+		[SerializeField] private List<Weapon> spawnedGuns;
+		[SerializeField] private List<Transform> weaponSlots;
 		[SerializeField] private float speed;
 		[SerializeField] private VariableJoystick variableJoystick;
 		[SerializeField] private Rigidbody2D rb;
@@ -25,12 +29,6 @@ namespace Neuro_Knights
 			if (GameStateManager.GetGameState() != GameState.Playing) return;
 
 			PlayerMovement();
-
-			// if (levelManager.GetSpawnedEnemies().Count == 0)
-			// 	return;
-
-			// LookAtEnemy();
-			// Shoot();
 		}
 
 		private void PlayerMovement()
@@ -44,16 +42,27 @@ namespace Neuro_Knights
 			}
 		}
 
-		private void LookAtEnemy()
+		public void SpawnGun()
 		{
-			Vector2 closestEnemyPos = GetClosestEnemy().transform.position;
-			Vector2 targetPos;
+			spawnedGuns.Add(Instantiate(weapons[0], transform));
+			UpdateGunPositions();
+		}
 
-			targetPos.x = closestEnemyPos.x - transform.position.x;
-			targetPos.y = closestEnemyPos.y - transform.position.y;
-			float angle = Mathf.Atan2(targetPos.y, targetPos.x) * Mathf.Rad2Deg;
-			// transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-			transform.DORotateQuaternion(Quaternion.Euler(new Vector3(0, 0, angle)), 0.5f);
+		void UpdateGunPositions()
+		{
+			float angleStep = 360f / spawnedGuns.Count;
+
+			for (int i = 0; i < spawnedGuns.Count; i++)
+			{
+				float angle = i * angleStep * Mathf.Deg2Rad;
+				Vector3 newPosition = new Vector3(
+					transform.position.x + Mathf.Cos(angle) * radius,
+					transform.position.y + Mathf.Sin(angle) * radius,
+					0
+				);
+
+				spawnedGuns[i].transform.position = newPosition;
+			}
 		}
 
 		public Vector2 GetPlayerPosition()
@@ -80,19 +89,6 @@ namespace Neuro_Knights
 
 			// closestEnemy.GetComponent<SpriteRenderer>().color = Color.red;
 			return closestEnemy;
-		}
-
-		private void Shoot()
-		{
-			Enemy closestEnemy = GetClosestEnemy();
-
-			if (closestEnemy != null)
-			{
-				if (closestEnemy.GetDistanceToPlayer() <= weapon.range)
-				{
-					weapon.Fire();
-				}
-			}
 		}
 	}
 }

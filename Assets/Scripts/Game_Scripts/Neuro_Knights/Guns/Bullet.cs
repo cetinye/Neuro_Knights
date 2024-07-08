@@ -23,6 +23,10 @@ namespace Neuro_Knights
 					Destroy(gameObject);
 				}
 			}
+			else
+			{
+				Destroy(gameObject);
+			}
 		}
 
 		public void SetDamage(float damage)
