@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Neuro_Knights
 {
@@ -11,6 +12,8 @@ namespace Neuro_Knights
 		[SerializeField] private TMP_Text killedText;
 		[SerializeField] private TMP_Text levelTimeText;
 		[SerializeField] private GameObject upgradePanel;
+		[SerializeField] private Slider xpSlider;
+		[SerializeField] private TMP_Text xpSliderLvlText;
 
 		[Header("Flash Variables")]
 		[SerializeField] private float flashInterval = 0.5f;
@@ -34,6 +37,20 @@ namespace Neuro_Knights
 		public void SetUpgradePanel(bool state)
 		{
 			upgradePanel.SetActive(state);
+		}
+
+		public void SetXpSlider(float value)
+		{
+			xpSlider.DOValue(value, 0.2f);
+		}
+
+		public void FillAndSetExcessXP(float excessXp)
+		{
+			xpSlider.DOValue(xpSlider.maxValue, 0.2f).OnComplete(() =>
+			{
+				xpSliderLvlText.text = "Level " + LevelManager.instance.GetPlayer().GetXPLevel();
+				xpSlider.DOValue(excessXp, 0.2f);
+			});
 		}
 
 		public void FlashRed()

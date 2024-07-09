@@ -18,6 +18,8 @@ namespace Neuro_Knights
 		[SerializeField] private float xBound;
 		[SerializeField] private float yBound;
 		private LevelManager levelManager;
+		private float xpAmount;
+		private int xpLevel;
 
 		void Start()
 		{
@@ -89,6 +91,26 @@ namespace Neuro_Knights
 
 			// closestEnemy.GetComponent<SpriteRenderer>().color = Color.red;
 			return closestEnemy;
+		}
+
+		public void AddXP(float amount)
+		{
+			xpAmount += amount;
+			if (xpAmount >= 100)
+			{
+				xpLevel++;
+				levelManager.uiManager.FillAndSetExcessXP((xpAmount - 100) / 100);
+				xpAmount -= 100;
+			}
+			else
+			{
+				levelManager.uiManager.SetXpSlider(xpAmount / 100);
+			}
+		}
+
+		public int GetXPLevel()
+		{
+			return xpLevel;
 		}
 	}
 }
