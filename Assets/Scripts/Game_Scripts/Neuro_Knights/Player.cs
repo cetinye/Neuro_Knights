@@ -42,6 +42,9 @@ namespace Neuro_Knights
 			{
 				transform.position = new Vector3(Mathf.Clamp(transform.position.x, -xBound, xBound), Mathf.Clamp(transform.position.y, -yBound, yBound), 0);
 			}
+
+			if (direction.normalized != Vector3.zero)
+				transform.up = direction.normalized;
 		}
 
 		public void SpawnGun()
