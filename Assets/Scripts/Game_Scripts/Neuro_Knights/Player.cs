@@ -9,6 +9,7 @@ namespace Neuro_Knights
 	{
 		[SerializeField] private float radius;
 		[SerializeField] private int gunAmount;
+		[SerializeField] private Transform gunsTransform;
 		[SerializeField] private List<Weapon> weapons;
 		[SerializeField] private List<Weapon> spawnedGuns;
 		[SerializeField] private List<Transform> weaponSlots;
@@ -49,7 +50,7 @@ namespace Neuro_Knights
 
 		public void SpawnGun()
 		{
-			spawnedGuns.Add(Instantiate(weapons[0], transform));
+			spawnedGuns.Add(Instantiate(weapons[0], gunsTransform));
 			UpdateGunPositions();
 		}
 
