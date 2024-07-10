@@ -22,6 +22,7 @@ namespace Neuro_Knights
 		public void SpawnEnemies(float interval)
 		{
 			InvokeRepeating(nameof(SpawnEnemy), interval, interval);
+			InvokeRepeating(nameof(SpawnEnemy), 0, interval);
 		}
 
 		private void SpawnEnemy()

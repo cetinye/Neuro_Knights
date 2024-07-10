@@ -24,6 +24,9 @@ namespace Neuro_Knights
 			if (levelManager.GetSpawnedEnemies().Count == 0)
 				return;
 
+			if (GameStateManager.GetGameState() != GameState.Playing)
+				return;
+
 			LookAtEnemy();
 			Shoot();
 		}

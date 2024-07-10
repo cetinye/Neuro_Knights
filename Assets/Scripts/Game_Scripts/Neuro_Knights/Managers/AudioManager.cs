@@ -90,6 +90,9 @@ namespace Neuro_Knights
     {
         PistolFire,
         TrajectoryHit,
+        Death,
+        XPPickup,
+        LevelUp,
     }
 
     [System.Serializable]

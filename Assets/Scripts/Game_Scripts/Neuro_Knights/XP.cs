@@ -19,6 +19,7 @@ namespace Neuro_Knights
 
 				if (Vector2.Distance(transform.position, LevelManager.instance.GetPlayer().GetPlayerPosition()) <= 0.1f)
 				{
+					AudioManager.instance.PlayOneShot(SoundType.XPPickup);
 					player.AddXP(xpAmount);
 					Destroy(gameObject);
 				}

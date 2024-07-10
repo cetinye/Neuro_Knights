@@ -98,6 +98,7 @@ namespace Neuro_Knights
 			xpAmount += amount;
 			if (xpAmount >= 100)
 			{
+				AudioManager.instance.PlayOneShot(SoundType.LevelUp);
 				xpLevel++;
 				levelManager.uiManager.FillAndSetExcessXP((xpAmount - 100) / 100);
 				xpAmount -= 100;

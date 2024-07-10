@@ -67,6 +67,7 @@ namespace Neuro_Knights
 			if (health == 0)
 			{
 				target.enabled = false;
+				AudioManager.instance.PlayOneShot(SoundType.Death);
 				levelManager.GetEnemySpawner().RemoveEnemy(this);
 				SpawnXP();
 				Destroy(gameObject);
