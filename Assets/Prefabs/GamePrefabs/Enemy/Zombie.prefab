@@ -144,6 +144,11 @@ MonoBehaviour:
   maxHealth: 100
   healthBar: {fileID: 8553853487677178220}
   target: {fileID: 2595971513342931365}
+  levelManager: {fileID: 0}
+  player: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  isFollowing: 0
+  xP: {fileID: 588122311847561396, guid: 0b16c9b6e50f321478e6fab3d645e2d0, type: 3}
 --- !u!212 &4243652321428138898
 SpriteRenderer:
   m_ObjectHideFlags: 0

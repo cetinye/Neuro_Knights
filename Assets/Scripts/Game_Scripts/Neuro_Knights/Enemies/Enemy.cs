@@ -19,6 +19,7 @@ namespace Neuro_Knights
 		public SpriteRenderer spriteRenderer;
 		public bool isFollowing = false;
 
+		[SerializeField] private XP xP;
 
 		void Awake()
 		{
@@ -67,6 +68,7 @@ namespace Neuro_Knights
 			{
 				target.enabled = false;
 				levelManager.GetEnemySpawner().RemoveEnemy(this);
+				SpawnXP();
 				Destroy(gameObject);
 			}
 		}
@@ -78,6 +80,14 @@ namespace Neuro_Knights
 			Sequence sequence = DOTween.Sequence();
 			sequence.Append(spriteRenderer.DOColor(Color.red, 0.1f));
 			sequence.Append(spriteRenderer.DOColor(Color.white, 0.1f));
+		}
+
+		private void SpawnXP()
+		{
+			Quaternion quaternion = Quaternion.identity;
+			quaternion.eulerAngles = new Vector3(0f, 0f, UnityEngine.Random.Range(0, 180));
+
+			Instantiate(xP, transform.position, quaternion);
 		}
 	}
 }

@@ -19,7 +19,7 @@ namespace Neuro_Knights
 		[SerializeField] private float yBound;
 		private LevelManager levelManager;
 		private float xpAmount;
-		private int xpLevel;
+		private int xpLevel = 1;
 
 		void Start()
 		{

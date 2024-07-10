@@ -73,6 +73,8 @@ namespace Neuro_Knights
 
 		public void RemoveEnemy(Enemy enemy)
 		{
+			if (!spawnedEnemies.Contains(enemy)) return;
+
 			spawnedEnemies.Remove(enemy);
 			levelManager.EnemyKilled();
 		}
