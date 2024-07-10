@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54f28054916fdb44cb161f0ed121ecd4, type: 3}
   m_Name: LevelSO
   m_EditorClassIdentifier: 
-  levelTime: 120
+  levelTime: 0

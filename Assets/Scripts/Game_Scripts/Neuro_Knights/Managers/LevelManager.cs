@@ -102,21 +102,8 @@ namespace Neuro_Knights
 		{
 			if (isLevelTimerOn)
 			{
-				levelTimer -= Time.deltaTime;
+				levelTimer += Time.deltaTime;
 				uiManager.UpdateLevelTime(levelTimer);
-			}
-
-			if (levelTimer < 0)
-			{
-				isLevelTimerOn = false;
-				uiManager.UpdateLevelTime(0);
-			}
-
-			if (levelTimer <= 5.2f && isFlashable)
-			{
-				isFlashable = false;
-				// GameManager.instance.PlayFx("Countdown", 0.7f, 1f);
-				uiManager.FlashRed();
 			}
 		}
 
@@ -134,8 +121,16 @@ namespace Neuro_Knights
 				uiManager.UpdateWaveTime(0);
 
 				enemySpawner.NextWave();
+				waveTime += 10;
 				waveTimer = waveTime;
 				isWaveTimerOn = true;
+			}
+
+			if (waveTimer <= 5.2f && isFlashable)
+			{
+				isFlashable = false;
+				// GameManager.instance.PlayFx("Countdown", 0.7f, 1f);
+				uiManager.FlashRed();
 			}
 		}
 

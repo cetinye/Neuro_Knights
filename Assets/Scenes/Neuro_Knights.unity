@@ -1306,7 +1306,7 @@ MonoBehaviour:
   levelSO: {fileID: 0}
   levels:
   - {fileID: 11400000, guid: 027b51cbca4f94c41b8159d112c85d5e, type: 2}
-  levelTime: 120
+  levelTime: 0
   waveTime: 30
   player: {fileID: 1677222439}
   enemySpawner: {fileID: 1187309900}

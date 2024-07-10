@@ -23,7 +23,7 @@ namespace Neuro_Knights
 
 		void Awake()
 		{
-			defaultColor = levelTimeText.color;
+			defaultColor = waveTimeText.color;
 		}
 
 		public void UpdateKilledText(int value)
@@ -69,9 +69,9 @@ namespace Neuro_Knights
 		{
 			Sequence redFlash = DOTween.Sequence();
 
-			redFlash.Append(levelTimeText.DOColor(Color.red, flashInterval))
+			redFlash.Append(waveTimeText.DOColor(Color.red, flashInterval))
 					.SetEase(Ease.Linear)
-					.Append(levelTimeText.DOColor(defaultColor, flashInterval))
+					.Append(waveTimeText.DOColor(defaultColor, flashInterval))
 					.SetEase(Ease.Linear)
 					.SetLoops(6);
 
