@@ -14,6 +14,7 @@ namespace Neuro_Knights
 		[SerializeField] private TMP_Text waveTimeText;
 		[SerializeField] private TMP_Text waveIdText;
 		[SerializeField] private GameObject upgradePanel;
+		[SerializeField] private GameObject characterSelectionPanel;
 		[SerializeField] private Slider xpSlider;
 		[SerializeField] private TMP_Text xpSliderLvlText;
 
@@ -49,6 +50,11 @@ namespace Neuro_Knights
 		public void SetUpgradePanel(bool state)
 		{
 			upgradePanel.SetActive(state);
+		}
+
+		public void SetCharacterSelectionPanel(bool state)
+		{
+			characterSelectionPanel.SetActive(state);
 		}
 
 		public void SetXpSlider(float value)

@@ -118,5 +118,10 @@ namespace Neuro_Knights
 		{
 			return xpLevel;
 		}
+
+		public void SetSprite(Sprite newSprite)
+		{
+			GetComponent<SpriteRenderer>().sprite = newSprite;
+		}
 	}
 }

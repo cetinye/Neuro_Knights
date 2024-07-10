@@ -4,7 +4,7 @@ namespace Neuro_Knights
 {
     public static class GameStateManager
     {
-        private static GameState gameState = GameState.Idle;
+        private static GameState gameState = GameState.None;
         public static event Action OnGameStateChanged;
 
         public static void SetGameState(GameState newGameState)
@@ -21,7 +21,9 @@ namespace Neuro_Knights
 
     public enum GameState
     {
-        Idle,
+        None,
+        CharacterSelection,
+        Start,
         Playing,
         Upgrade,
     }

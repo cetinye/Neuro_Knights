@@ -66,14 +66,12 @@ namespace Neuro_Knights
 			levelTimer = levelTime;
 			waveTimer = waveTime;
 
-			GameStateManager.SetGameState(GameState.Playing);
-			enemySpawner.SpawnEnemies();
+			GameStateManager.SetGameState(GameState.CharacterSelection);
 		}
 
 		private void AssignLevelVariables()
 		{
 			levelSO = levels[levelId];
-
 			levelTime = levelSO.levelTime;
 		}
 
@@ -81,10 +79,17 @@ namespace Neuro_Knights
 		{
 			switch (GameStateManager.GetGameState())
 			{
-				case GameState.Idle:
+				case GameState.CharacterSelection:
+					uiManager.SetCharacterSelectionPanel(true);
+					break;
+
+				case GameState.Start:
+					GameStateManager.SetGameState(GameState.Playing);
+					enemySpawner.SpawnEnemies();
 					break;
 
 				case GameState.Playing:
+					uiManager.SetCharacterSelectionPanel(false);
 					uiManager.SetUpgradePanel(false);
 					isLevelTimerOn = true;
 					isWaveTimerOn = true;
@@ -132,6 +137,11 @@ namespace Neuro_Knights
 				// GameManager.instance.PlayFx("Countdown", 0.7f, 1f);
 				uiManager.FlashRed();
 			}
+		}
+
+		public void ChooseCharacter(Sprite chosenSp)
+		{
+			player.SetSprite(chosenSp);
 		}
 
 		public Player GetPlayer()
