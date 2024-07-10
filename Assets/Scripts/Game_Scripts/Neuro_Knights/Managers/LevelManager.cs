@@ -15,10 +15,15 @@ namespace Neuro_Knights
 		[SerializeField] private LevelSO levelSO;
 		[SerializeField] private List<LevelSO> levels = new List<LevelSO>();
 
-		[Header("Time Variables")]
+		[Header("Level Time Variables")]
 		[SerializeField] private float levelTime;
 		private float levelTimer;
 		private bool isLevelTimerOn;
+
+		[Header("Wave Time Variables")]
+		[SerializeField] private float waveTime;
+		private float waveTimer;
+		private bool isWaveTimerOn;
 
 		[Header("Player Variables")]
 		[SerializeField] private Player player;
@@ -26,7 +31,7 @@ namespace Neuro_Knights
 
 		[Header("Enemy Spawner Variables")]
 		[SerializeField] private EnemySpawner enemySpawner;
-		[SerializeField] private float spawnInterval;
+		// [SerializeField] private float spawnInterval;
 
 		[Header("Flash Interval")]
 		[SerializeField] private bool isFlashable = true;
@@ -51,6 +56,7 @@ namespace Neuro_Knights
 		void Update()
 		{
 			LevelTimer();
+			WaveTimer();
 		}
 
 		void StartGame()
@@ -58,8 +64,10 @@ namespace Neuro_Knights
 			AssignLevelVariables();
 
 			levelTimer = levelTime;
+			waveTimer = waveTime;
+
 			GameStateManager.SetGameState(GameState.Playing);
-			enemySpawner.SpawnEnemies(spawnInterval);
+			enemySpawner.SpawnEnemies();
 		}
 
 		private void AssignLevelVariables()
@@ -79,10 +87,12 @@ namespace Neuro_Knights
 				case GameState.Playing:
 					uiManager.SetUpgradePanel(false);
 					isLevelTimerOn = true;
+					isWaveTimerOn = true;
 					break;
 
 				case GameState.Upgrade:
 					isLevelTimerOn = false;
+					isWaveTimerOn = false;
 					uiManager.SetUpgradePanel(true);
 					break;
 			}
@@ -107,6 +117,25 @@ namespace Neuro_Knights
 				isFlashable = false;
 				// GameManager.instance.PlayFx("Countdown", 0.7f, 1f);
 				uiManager.FlashRed();
+			}
+		}
+
+		private void WaveTimer()
+		{
+			if (isWaveTimerOn)
+			{
+				waveTimer -= Time.deltaTime;
+				uiManager.UpdateWaveTime(waveTimer);
+			}
+
+			if (waveTimer < 0)
+			{
+				isWaveTimerOn = false;
+				uiManager.UpdateWaveTime(0);
+
+				enemySpawner.NextWave();
+				waveTimer = waveTime;
+				isWaveTimerOn = true;
 			}
 		}
 

@@ -11,6 +11,8 @@ namespace Neuro_Knights
 	{
 		[SerializeField] private TMP_Text killedText;
 		[SerializeField] private TMP_Text levelTimeText;
+		[SerializeField] private TMP_Text waveTimeText;
+		[SerializeField] private TMP_Text waveIdText;
 		[SerializeField] private GameObject upgradePanel;
 		[SerializeField] private Slider xpSlider;
 		[SerializeField] private TMP_Text xpSliderLvlText;
@@ -31,7 +33,17 @@ namespace Neuro_Knights
 
 		public void UpdateLevelTime(float value)
 		{
-			levelTimeText.text = "Time Left: " + value.ToString("F0");
+			levelTimeText.text = "Level Time: " + value.ToString("F0");
+		}
+
+		public void UpdateWaveTime(float value)
+		{
+			waveTimeText.text = "Wave Time: " + value.ToString("F0");
+		}
+
+		public void UpdateWaveCount(int value)
+		{
+			waveIdText.text = "Wave \n" + value.ToString("00");
 		}
 
 		public void SetUpgradePanel(bool state)

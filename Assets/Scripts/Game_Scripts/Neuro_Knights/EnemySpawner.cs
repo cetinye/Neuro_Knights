@@ -11,6 +11,8 @@ namespace Neuro_Knights
 		[SerializeField] private float range;
 		[SerializeField] private List<Enemy> spawnedEnemies = new List<Enemy>();
 		[SerializeField] private CrossMark crossMark;
+		private int wave = 1;
+		private float spawnInterval;
 
 		private LevelManager levelManager;
 
@@ -19,10 +21,10 @@ namespace Neuro_Knights
 			levelManager = LevelManager.instance;
 		}
 
-		public void SpawnEnemies(float interval)
+		public void SpawnEnemies()
 		{
-			InvokeRepeating(nameof(SpawnEnemy), interval, interval);
-			InvokeRepeating(nameof(SpawnEnemy), 0, interval);
+			SetWaveVariables();
+			InvokeRepeating(nameof(SpawnEnemy), 1, spawnInterval);
 		}
 
 		private void SpawnEnemy()
@@ -83,6 +85,45 @@ namespace Neuro_Knights
 		public CrossMark SpawnCrossMark(Vector3 position)
 		{
 			return Instantiate(crossMark, position, Quaternion.identity);
+		}
+
+		public void NextWave()
+		{
+			CancelInvoke(nameof(SpawnEnemy));
+			wave++;
+			SpawnEnemies();
+		}
+
+		private void SetWaveVariables()
+		{
+			switch (wave)
+			{
+				case 1:
+					spawnInterval = 3f;
+					break;
+
+				case 2:
+					spawnInterval = 2f;
+					break;
+
+				case 3:
+					spawnInterval = 1.5f;
+					break;
+
+				case 4:
+					spawnInterval = 1f;
+					break;
+
+				case 5:
+					spawnInterval = 0.5f;
+					break;
+
+				case 6:
+					spawnInterval = 0.25f;
+					break;
+			}
+
+			LevelManager.instance.uiManager.UpdateWaveCount(wave);
 		}
 	}
 }
