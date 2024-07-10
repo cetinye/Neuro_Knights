@@ -95,7 +95,8 @@ namespace Neuro_Knights
 
 		public void AddXP(float amount)
 		{
-			xpAmount += amount;
+			xpAmount += amount / xpLevel;
+
 			if (xpAmount >= 100)
 			{
 				AudioManager.instance.PlayOneShot(SoundType.LevelUp);
