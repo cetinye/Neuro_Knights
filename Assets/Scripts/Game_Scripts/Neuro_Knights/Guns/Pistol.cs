@@ -49,9 +49,9 @@ namespace Neuro_Knights
 		{
 			if (isReadyToShoot)
 			{
+				isReadyToShoot = false;
 				PlayFireSound();
 				MuzzleFlash();
-				isReadyToShoot = false;
 				SpawnBullet();
 				Invoke(nameof(ReadyToShoot), fireRate);
 			}
@@ -59,10 +59,15 @@ namespace Neuro_Knights
 
 		public void SpawnBullet()
 		{
+			Enemy closestEnemy = GetClosestEnemy();
+
 			Bullet spawnedBullet = Instantiate(bullet, new Vector3(nozzle.position.x, nozzle.position.y, -1f), Quaternion.identity, nozzle.transform);
 			spawnedBullet.transform.localPosition = nozzle.transform.localPosition;
+
+			CheckTarget(closestEnemy, damage);
+
 			spawnedBullet.SetDamage(damage);
-			spawnedBullet.SetTarget(LevelManager.instance.GetPlayer().GetClosestEnemy());
+			spawnedBullet.SetTarget(closestEnemy);
 		}
 
 		public void ReadyToShoot()

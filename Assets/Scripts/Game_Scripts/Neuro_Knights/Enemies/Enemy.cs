@@ -10,6 +10,7 @@ namespace Neuro_Knights
 		public float speed;
 		public float distanceToPlayer;
 		public float health;
+		public float instantHealth; // health calculated before bullet hits
 		public float maxHealth;
 		public HealthBar healthBar;
 		public Target target;
@@ -31,6 +32,7 @@ namespace Neuro_Knights
 		void Awake()
 		{
 			health = maxHealth;
+			instantHealth = health;
 			healthBar.SetHealth(health);
 		}
 
@@ -89,6 +91,16 @@ namespace Neuro_Knights
 				SpawnXP();
 				Destroy(gameObject);
 			}
+		}
+
+		public void InstantHealthDamage(float damage)
+		{
+			instantHealth -= damage;
+		}
+
+		public float GetInstantHealth()
+		{
+			return instantHealth;
 		}
 
 		public void PlayBloodParticle()

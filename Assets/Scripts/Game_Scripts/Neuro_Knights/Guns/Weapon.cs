@@ -21,6 +21,8 @@ namespace Neuro_Knights
 
 		public void LookAtEnemy()
 		{
+			if (GetClosestEnemy() == null) return;
+
 			Vector2 closestEnemyPos = GetClosestEnemy().transform.position;
 			Vector2 targetPos;
 
@@ -51,7 +53,7 @@ namespace Neuro_Knights
 			{
 				// enemy.GetComponent<SpriteRenderer>().color = Color.white;
 				float distance = enemy.GetDistanceToPlayer();
-				if (distance < minDistance)
+				if (distance < minDistance && enemy.GetInstantHealth() > 0)
 				{
 					minDistance = distance;
 					closestEnemy = enemy;
@@ -60,6 +62,12 @@ namespace Neuro_Knights
 
 			// closestEnemy.GetComponent<SpriteRenderer>().color = Color.red;
 			return closestEnemy;
+		}
+
+		public void CheckTarget(Enemy enemy, float damage)
+		{
+			if (enemy.GetInstantHealth() > 0)
+				enemy.InstantHealthDamage(damage);
 		}
 	}
 }
