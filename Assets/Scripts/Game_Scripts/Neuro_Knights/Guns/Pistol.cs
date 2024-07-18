@@ -7,6 +7,7 @@ namespace Neuro_Knights
 	public class Pistol : Weapon
 	{
 		public bool isReadyToShoot = true;
+		[SerializeField] private Transform nozzle;
 		private LevelManager levelManager;
 
 		void Awake()
@@ -58,7 +59,8 @@ namespace Neuro_Knights
 
 		public void SpawnBullet()
 		{
-			Bullet spawnedBullet = Instantiate(bullet, new Vector3(transform.position.x, transform.position.y, -1f), Quaternion.identity, transform);
+			Bullet spawnedBullet = Instantiate(bullet, new Vector3(nozzle.position.x, nozzle.position.y, -1f), Quaternion.identity, nozzle.transform);
+			spawnedBullet.transform.localPosition = nozzle.transform.localPosition;
 			spawnedBullet.SetDamage(damage);
 			spawnedBullet.SetTarget(LevelManager.instance.GetPlayer().GetClosestEnemy());
 		}
@@ -70,7 +72,7 @@ namespace Neuro_Knights
 
 		private void MuzzleFlash()
 		{
-			ParticleSystem spawnedParticle = Instantiate(muzzleFlash, Vector3.zero, Quaternion.Euler(new Vector3(-90f, 0f, 0f)), transform);
+			ParticleSystem spawnedParticle = Instantiate(muzzleFlash, Vector3.zero, Quaternion.Euler(new Vector3(-90f, 0f, 0f)), nozzle.transform);
 			spawnedParticle.transform.localPosition = Vector3.zero;
 			spawnedParticle.transform.rotation = Quaternion.Euler(new Vector3(-90f, 0f, 0f));
 			spawnedParticle.Play();
