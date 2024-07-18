@@ -715,12 +715,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 332785538}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.015151515}
-  m_LocalScale: {x: 0.5224037, y: 0.5224037, z: 0.5224037}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.2643309, y: 2.1285594, z: 0}
+  m_LocalScale: {x: 0.7267761, y: 0.7267761, z: 0.7267761}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1677222437}
+  m_Father: {fileID: 1854132833}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &332785540
 SpriteRenderer:
@@ -1949,6 +1949,7 @@ MonoBehaviour:
   waveTime: 30
   player: {fileID: 1677222439}
   enemySpawner: {fileID: 1187309900}
+  damagePopupPrefab: {fileID: 5644573142796254169, guid: 3fa017e489c1c2b4fbc7a6409ff7f53a, type: 3}
   isFlashable: 1
 --- !u!1 &619394800
 GameObject:
@@ -3200,6 +3201,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: NoInputWarning
       objectReference: {fileID: 0}
+    - target: {fileID: 3666247543692887846, guid: c5f93583e4fec0547ae9e7d584f06b3b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3666247543692887847, guid: c5f93583e4fec0547ae9e7d584f06b3b, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -4117,7 +4122,6 @@ Transform:
   m_LocalScale: {x: 0.33, y: 0.33, z: 0.33}
   m_ConstrainProportionsScale: 1
   m_Children:
-  - {fileID: 332785539}
   - {fileID: 1854132833}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4162,7 +4166,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   body: {fileID: 332785540}
   cape: {fileID: 1854132834}
-  radius: 0.5
+  gunRadius: 0.5
   gunAmount: 5
   gunsTransform: {fileID: 1490296445}
   weapons:
@@ -4182,6 +4186,10 @@ MonoBehaviour:
   rb: {fileID: 1677222438}
   xBound: 23.83
   yBound: 24.24
+  xScaleAmount: 0.04
+  yScaleAmount: 0.04
+  xScaleTime: 0.75
+  yScaleTime: 0.75
 --- !u!70 &1677222440
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -4889,7 +4897,8 @@ Transform:
   m_LocalPosition: {x: 0.19, y: -1.53, z: 0.015151515}
   m_LocalScale: {x: 0.71879596, y: 0.71879596, z: 0.71879596}
   m_ConstrainProportionsScale: 1
-  m_Children: []
+  m_Children:
+  - {fileID: 332785539}
   m_Father: {fileID: 1677222437}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1854132834

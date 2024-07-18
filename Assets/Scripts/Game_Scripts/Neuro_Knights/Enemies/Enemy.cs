@@ -21,19 +21,26 @@ namespace Neuro_Knights
 
 		[SerializeField] private XP xP;
 
+		[Header("Walk Anim Variables")]
+		[SerializeField] private float xScaleAmount;
+		[SerializeField] private float yScaleAmount;
+		[SerializeField] private float xScaleTime;
+		[SerializeField] private float yScaleTime;
+		private Sequence walkSeq;
+
 		void Awake()
 		{
-			spriteRenderer = GetComponent<SpriteRenderer>();
-
 			health = maxHealth;
 			healthBar.SetHealth(health);
 		}
 
-		void Start()
+		public virtual void Start()
 		{
 			levelManager = LevelManager.instance;
 			player = levelManager.GetPlayer();
 			isFollowing = true;
+
+			WalkAnim();
 		}
 
 		public virtual void FollowPlayer()
@@ -99,6 +106,16 @@ namespace Neuro_Knights
 			quaternion.eulerAngles = new Vector3(0f, 0f, UnityEngine.Random.Range(0, 180));
 
 			Instantiate(xP, transform.position, quaternion);
+		}
+
+		private void WalkAnim()
+		{
+			walkSeq = DOTween.Sequence();
+
+			walkSeq.Append(spriteRenderer.transform.DOScaleX(spriteRenderer.transform.localScale.x + xScaleAmount, xScaleTime));
+			walkSeq.Join(spriteRenderer.transform.DOScaleY(spriteRenderer.transform.localScale.y - yScaleAmount, yScaleTime));
+
+			walkSeq.SetLoops(-1, LoopType.Yoyo);
 		}
 	}
 }

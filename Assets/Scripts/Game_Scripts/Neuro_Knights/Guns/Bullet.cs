@@ -20,6 +20,7 @@ namespace Neuro_Knights
 				if (Vector2.Distance(transform.position, target.transform.position) <= 0.1f)
 				{
 					target.TakeDamage(damage);
+					DamagePopup.Create(transform.position, damage);
 					Destroy(gameObject);
 				}
 			}

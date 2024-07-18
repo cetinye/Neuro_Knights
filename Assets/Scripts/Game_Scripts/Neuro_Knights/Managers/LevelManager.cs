@@ -33,6 +33,9 @@ namespace Neuro_Knights
 		[SerializeField] private EnemySpawner enemySpawner;
 		// [SerializeField] private float spawnInterval;
 
+		[Header("DamagePopup Variables")]
+		public DamagePopup damagePopupPrefab;
+
 		[Header("Flash Interval")]
 		[SerializeField] private bool isFlashable = true;
 

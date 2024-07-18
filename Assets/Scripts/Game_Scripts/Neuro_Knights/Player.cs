@@ -9,7 +9,7 @@ namespace Neuro_Knights
 	{
 		[SerializeField] private SpriteRenderer body;
 		[SerializeField] private SpriteRenderer cape;
-		[SerializeField] private float radius;
+		[SerializeField] private float gunRadius;
 		[SerializeField] private int gunAmount;
 		[SerializeField] private Transform gunsTransform;
 		[SerializeField] private List<Weapon> weapons;
@@ -20,6 +20,14 @@ namespace Neuro_Knights
 		[SerializeField] private Rigidbody2D rb;
 		[SerializeField] private float xBound;
 		[SerializeField] private float yBound;
+
+		[Header("Walk Anim Variables")]
+		[SerializeField] private float xScaleAmount;
+		[SerializeField] private float yScaleAmount;
+		[SerializeField] private float xScaleTime;
+		[SerializeField] private float yScaleTime;
+		private Sequence walkSeq;
+
 		private LevelManager levelManager;
 		private float xpAmount;
 		private int xpLevel = 1;
@@ -27,6 +35,8 @@ namespace Neuro_Knights
 		void Start()
 		{
 			levelManager = LevelManager.instance;
+
+			WalkAnim();
 		}
 
 		public void Update()
@@ -43,7 +53,7 @@ namespace Neuro_Knights
 
 			if (Mathf.Abs(transform.position.x) > xBound || Mathf.Abs(transform.position.y) > yBound)
 			{
-				transform.position = new Vector3(Mathf.Clamp(transform.position.x, -xBound, xBound), Mathf.Clamp(transform.position.y, -yBound, yBound), 0);
+				transform.position = new Vector3(Mathf.Clamp(transform.position.x, -xBound, xBound), Mathf.Clamp(transform.position.y, -yBound, yBound), -0.005f);
 			}
 
 			// if (direction.normalized != Vector3.zero)
@@ -74,8 +84,8 @@ namespace Neuro_Knights
 			{
 				float angle = i * angleStep * Mathf.Deg2Rad;
 				Vector3 newPosition = new Vector3(
-					transform.position.x + Mathf.Cos(angle) * radius,
-					transform.position.y + Mathf.Sin(angle) * radius,
+					transform.position.x + Mathf.Cos(angle) * gunRadius,
+					transform.position.y + Mathf.Sin(angle) * gunRadius,
 					0
 				);
 
@@ -139,6 +149,16 @@ namespace Neuro_Knights
 		public void SetCape(Sprite newCape)
 		{
 			cape.sprite = newCape;
+		}
+
+		private void WalkAnim()
+		{
+			walkSeq = DOTween.Sequence();
+
+			walkSeq.Append(cape.transform.DOScaleX(cape.transform.localScale.x + xScaleAmount, xScaleTime));
+			walkSeq.Join(cape.transform.DOScaleY(cape.transform.localScale.y - yScaleAmount, yScaleTime));
+
+			walkSeq.SetLoops(-1, LoopType.Yoyo);
 		}
 	}
 }

@@ -24,6 +24,22 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5610276208524930886, guid: bed2b855ad02a3246a6316560986c3c8, type: 3}
+      propertyPath: m_Size.x
+      value: 2.56
+      objectReference: {fileID: 0}
+    - target: {fileID: 5610276208524930886, guid: bed2b855ad02a3246a6316560986c3c8, type: 3}
+      propertyPath: m_Size.y
+      value: 2.56
+      objectReference: {fileID: 0}
+    - target: {fileID: 5610276208524930886, guid: bed2b855ad02a3246a6316560986c3c8, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 33e91c0932b13614b9dd89645e424c07, type: 3}
+    - target: {fileID: 5610276208524930886, guid: bed2b855ad02a3246a6316560986c3c8, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6385581976835383046, guid: bed2b855ad02a3246a6316560986c3c8, type: 3}
       propertyPath: m_Value
       value: 1
