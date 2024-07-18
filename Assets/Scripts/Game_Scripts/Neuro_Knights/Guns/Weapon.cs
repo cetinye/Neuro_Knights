@@ -28,6 +28,16 @@ namespace Neuro_Knights
 			targetPos.y = closestEnemyPos.y - transform.position.y;
 			float angle = Mathf.Atan2(targetPos.y, targetPos.x) * Mathf.Rad2Deg;
 			// transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+
+			if (angle > 90)
+			{
+				transform.localScale = new Vector3(transform.localScale.x, -Mathf.Abs(transform.localScale.y), transform.localScale.z);
+			}
+			else if (angle < 90)
+			{
+				transform.localScale = new Vector3(transform.localScale.x, Mathf.Abs(transform.localScale.y), transform.localScale.z);
+			}
+
 			transform.DORotateQuaternion(Quaternion.Euler(new Vector3(0, 0, angle)), 0.5f);
 		}
 
