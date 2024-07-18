@@ -44,8 +44,18 @@ namespace Neuro_Knights
 				transform.position = new Vector3(Mathf.Clamp(transform.position.x, -xBound, xBound), Mathf.Clamp(transform.position.y, -yBound, yBound), 0);
 			}
 
-			if (direction.normalized != Vector3.zero)
-				transform.up = direction.normalized;
+			// if (direction.normalized != Vector3.zero)
+			// 	transform.up = direction.normalized;
+
+			if (direction.x > 0)
+			{
+				transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+			}
+
+			else if (direction.x < 0)
+			{
+				transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+			}
 		}
 
 		public void SpawnGun()

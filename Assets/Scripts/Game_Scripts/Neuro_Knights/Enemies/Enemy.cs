@@ -48,7 +48,17 @@ namespace Neuro_Knights
 			targetPos.x = player.transform.position.x - transform.position.x;
 			targetPos.y = player.transform.position.y - transform.position.y;
 			float angle = Mathf.Atan2(targetPos.y, targetPos.x) * Mathf.Rad2Deg;
-			transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+			// transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+
+			if (targetPos.x > 0)
+			{
+				transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+			}
+
+			else if (targetPos.x < 0)
+			{
+				transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+			}
 		}
 
 		public float GetDistanceToPlayer()
