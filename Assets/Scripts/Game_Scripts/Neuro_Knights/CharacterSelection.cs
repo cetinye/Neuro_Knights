@@ -8,7 +8,7 @@ namespace Neuro_Knights
 		public void Clicked()
 		{
 			LevelManager.instance.ChooseCharacter(GetComponent<Image>().sprite);
-			GameStateManager.SetGameState(GameState.Start);
+			GameStateManager.SetGameState(GameState.CapeSelection);
 		}
 	}
 }

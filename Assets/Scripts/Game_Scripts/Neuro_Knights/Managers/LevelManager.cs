@@ -83,7 +83,13 @@ namespace Neuro_Knights
 					uiManager.SetCharacterSelectionPanel(true);
 					break;
 
+				case GameState.CapeSelection:
+					uiManager.SetCharacterSelectionPanel(false);
+					uiManager.SetCapeSelectionPanel(true);
+					break;
+
 				case GameState.Start:
+					uiManager.SetCapeSelectionPanel(false);
 					GameStateManager.SetGameState(GameState.Playing);
 					enemySpawner.SpawnEnemies();
 					break;
@@ -142,6 +148,11 @@ namespace Neuro_Knights
 		public void ChooseCharacter(Sprite chosenSp)
 		{
 			player.SetSprite(chosenSp);
+		}
+
+		public void ChooseCape(Sprite chosenSp)
+		{
+			player.SetCape(chosenSp);
 		}
 
 		public Player GetPlayer()

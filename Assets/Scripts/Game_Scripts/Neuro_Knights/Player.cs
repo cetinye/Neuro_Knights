@@ -7,6 +7,8 @@ namespace Neuro_Knights
 {
 	public class Player : MonoBehaviour
 	{
+		[SerializeField] private SpriteRenderer body;
+		[SerializeField] private SpriteRenderer cape;
 		[SerializeField] private float radius;
 		[SerializeField] private int gunAmount;
 		[SerializeField] private Transform gunsTransform;
@@ -131,7 +133,12 @@ namespace Neuro_Knights
 
 		public void SetSprite(Sprite newSprite)
 		{
-			GetComponent<SpriteRenderer>().sprite = newSprite;
+			body.sprite = newSprite;
+		}
+
+		public void SetCape(Sprite newCape)
+		{
+			cape.sprite = newCape;
 		}
 	}
 }

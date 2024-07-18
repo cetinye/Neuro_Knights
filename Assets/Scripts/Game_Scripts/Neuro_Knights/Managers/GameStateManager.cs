@@ -23,6 +23,7 @@ namespace Neuro_Knights
     {
         None,
         CharacterSelection,
+        CapeSelection,
         Start,
         Playing,
         Upgrade,
