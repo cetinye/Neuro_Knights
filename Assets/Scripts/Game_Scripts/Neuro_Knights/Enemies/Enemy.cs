@@ -14,6 +14,7 @@ namespace Neuro_Knights
 		public float maxHealth;
 		public HealthBar healthBar;
 		public Target target;
+		public ParticleSystem blood;
 
 		public LevelManager levelManager;
 		public Player player;
@@ -80,7 +81,6 @@ namespace Neuro_Knights
 			health -= damage;
 			health = Mathf.Clamp(health, 0f, maxHealth);
 
-			PlayBloodParticle();
 			healthBar.SetHealth(health / maxHealth);
 
 			if (health == 0)
@@ -88,6 +88,7 @@ namespace Neuro_Knights
 				target.enabled = false;
 				AudioManager.instance.PlayOneShot(SoundType.Death);
 				levelManager.GetEnemySpawner().RemoveEnemy(this);
+				PlayBloodParticle();
 				SpawnXP();
 				Destroy(gameObject);
 			}
@@ -105,7 +106,8 @@ namespace Neuro_Knights
 
 		public void PlayBloodParticle()
 		{
-			// ParticleSystem particleSystem = Instantiate(bloodParticle, transform.position, Quaternion.identity, transform);
+			ParticleSystem spawnedParticle = Instantiate(blood, transform.position, Quaternion.identity);
+			spawnedParticle.gameObject.SetActive(true);
 
 			Sequence sequence = DOTween.Sequence();
 			sequence.Append(spriteRenderer.DOColor(Color.red, 0.1f));

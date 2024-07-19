@@ -16,7 +16,7 @@ namespace Neuro_Knights
 		{
 			if (other.TryGetComponent(out Enemy enemy))
 			{
-				Debug.LogWarning("enemy hit circle: " + enemy.name);
+				/// TODO: set enemy on fire
 			}
 		}
 	}

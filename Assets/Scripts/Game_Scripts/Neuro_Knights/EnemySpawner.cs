@@ -72,7 +72,7 @@ namespace Neuro_Knights
 			return Instantiate(crossMark, position, Quaternion.identity);
 		}
 
-		private Vector2 GetRandomSpawnPos()
+		public Vector2 GetRandomSpawnPos(bool isForEnemy = true)
 		{
 			Bounds bounds = spawnAreaCollider.bounds;
 
@@ -81,16 +81,24 @@ namespace Neuro_Knights
 
 			Vector2 randomPos = new Vector2(Random.Range(minBounds.x, maxBounds.x), Random.Range(minBounds.y, maxBounds.y));
 
-			Vector2 playerPos = levelManager.GetPlayer().GetPlayerPosition();
-
-			if (Vector2.Distance(playerPos, randomPos) < range)
+			if (isForEnemy)
 			{
-				return GetRandomSpawnPos();
+				Vector2 playerPos = levelManager.GetPlayer().GetPlayerPosition();
+
+				if (Vector2.Distance(playerPos, randomPos) < range)
+				{
+					return GetRandomSpawnPos();
+				}
+				else
+				{
+					return randomPos;
+				}
 			}
 			else
 			{
 				return randomPos;
 			}
+
 		}
 
 		public void NextWave()

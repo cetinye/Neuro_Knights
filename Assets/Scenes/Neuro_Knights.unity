@@ -1046,7 +1046,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 22.001955, y: 30.000002}
+    oldSize: {x: 22, y: 30}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -1738,6 +1738,12 @@ MonoBehaviour:
   player: {fileID: 1677222439}
   enemySpawner: {fileID: 1187309900}
   damagePopupPrefab: {fileID: 5644573142796254169, guid: 3fa017e489c1c2b4fbc7a6409ff7f53a, type: 3}
+  objectAmount: 200
+  objects:
+  - {fileID: 663332529220655921, guid: f001bc8e12c496d40882b753732b4f8c, type: 3}
+  - {fileID: 663332529220655921, guid: c090032eff997c94296c1095befd4b3e, type: 3}
+  - {fileID: 663332529220655921, guid: 5d2cc8118df20c94e8f148e806e691cd, type: 3}
+  sceneTransform: {fileID: 451410307}
   isFlashable: 1
 --- !u!1 &619394800
 GameObject:
@@ -2933,7 +2939,7 @@ MonoBehaviour:
   sounds:
   - name: 0
     clip: {fileID: 8300000, guid: 321feb9f51af885488e5ed433aecd467, type: 3}
-    volume: 0.3
+    volume: 0.124
     loop: 0
     source: {fileID: 0}
   - name: 1

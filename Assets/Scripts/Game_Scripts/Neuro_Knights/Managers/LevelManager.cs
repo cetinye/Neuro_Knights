@@ -36,6 +36,11 @@ namespace Neuro_Knights
 		[Header("DamagePopup Variables")]
 		public DamagePopup damagePopupPrefab;
 
+		[Header("Scene Object Variables")]
+		[SerializeField] private int objectAmount;
+		[SerializeField] private List<GameObject> objects = new List<GameObject>();
+		[SerializeField] private Transform sceneTransform;
+
 		[Header("Flash Interval")]
 		[SerializeField] private bool isFlashable = true;
 
@@ -68,6 +73,8 @@ namespace Neuro_Knights
 
 			levelTimer = levelTime;
 			waveTimer = waveTime;
+
+			PopulateSceneWObjects();
 
 			GameStateManager.SetGameState(GameState.CharacterSelection);
 		}
@@ -181,6 +188,15 @@ namespace Neuro_Knights
 			if (killedCount % 10 == 0)
 			{
 				GameStateManager.SetGameState(GameState.Upgrade);
+			}
+		}
+
+		private void PopulateSceneWObjects()
+		{
+			for (int i = 0; i < objectAmount; i++)
+			{
+				GameObject chosenObj = objects[Random.Range(0, objects.Count)];
+				Instantiate(chosenObj, enemySpawner.GetRandomSpawnPos(false), Quaternion.identity, sceneTransform);
 			}
 		}
 	}
