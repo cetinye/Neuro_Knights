@@ -11,7 +11,8 @@ namespace Neuro_Knights
 		[SerializeField] private float range;
 		[SerializeField] private List<Enemy> spawnedEnemies = new List<Enemy>();
 		[SerializeField] private CrossMark crossMark;
-		private int wave = 3;
+		[SerializeField] private Collider2D spawnAreaCollider;
+		private int wave = 1;
 		private float spawnInterval;
 
 		private LevelManager levelManager;
@@ -49,24 +50,8 @@ namespace Neuro_Knights
 
 		private Vector2 GetSpawnPosition()
 		{
-			Vector2 vector2 = new Vector2(GetXPos(), GetYPos());
+			Vector2 vector2 = GetRandomSpawnPos();
 			return vector2;
-		}
-
-		private float GetXPos()
-		{
-			Vector2 playerPos = levelManager.GetPlayer().GetPlayerPosition();
-			float randomMinX = UnityEngine.Random.Range(playerPos.x - (range * 1.5f), playerPos.x - range);
-			float randomMaxX = UnityEngine.Random.Range(playerPos.x + range, playerPos.x + (range * 1.5f));
-			return UnityEngine.Random.Range(randomMinX, randomMaxX);
-		}
-
-		private float GetYPos()
-		{
-			Vector2 playerPos = levelManager.GetPlayer().GetPlayerPosition();
-			float randomMinY = UnityEngine.Random.Range(playerPos.y - (range * 1.5f), playerPos.y - range);
-			float randomMaxY = UnityEngine.Random.Range(playerPos.y + range, playerPos.y + (range * 1.5f));
-			return UnityEngine.Random.Range(randomMinY, randomMaxY);
 		}
 
 		public List<Enemy> GetSpawnedEnemies()
@@ -85,6 +70,27 @@ namespace Neuro_Knights
 		public CrossMark SpawnCrossMark(Vector3 position)
 		{
 			return Instantiate(crossMark, position, Quaternion.identity);
+		}
+
+		private Vector2 GetRandomSpawnPos()
+		{
+			Bounds bounds = spawnAreaCollider.bounds;
+
+			Vector2 minBounds = new Vector2(bounds.min.x, bounds.min.y);
+			Vector2 maxBounds = new Vector2(bounds.max.x, bounds.max.y);
+
+			Vector2 randomPos = new Vector2(Random.Range(minBounds.x, maxBounds.x), Random.Range(minBounds.y, maxBounds.y));
+
+			Vector2 playerPos = levelManager.GetPlayer().GetPlayerPosition();
+
+			if (Vector2.Distance(playerPos, randomPos) < range)
+			{
+				return GetRandomSpawnPos();
+			}
+			else
+			{
+				return randomPos;
+			}
 		}
 
 		public void NextWave()
@@ -120,6 +126,11 @@ namespace Neuro_Knights
 
 				case 6:
 					spawnInterval = 0.25f;
+					break;
+
+				// for testing delete
+				case 7:
+					spawnInterval = 0.1f;
 					break;
 			}
 
