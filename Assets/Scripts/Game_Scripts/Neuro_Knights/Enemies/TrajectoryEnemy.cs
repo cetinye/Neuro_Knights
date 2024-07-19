@@ -34,7 +34,6 @@ namespace Neuro_Knights
 		{
 			if (Vector2.Distance(transform.position, player.GetPlayerPosition()) <= range)
 			{
-				Debug.Log("Shoot");
 				weapon.Fire();
 			}
 		}

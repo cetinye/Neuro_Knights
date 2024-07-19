@@ -5,7 +5,9 @@ namespace Neuro_Knights
 	public class EffectCircle : MonoBehaviour
 	{
 		public float rotationSpeed;
-		public float damage;
+		public int damage;
+		public float burnDuration;
+		public float burnInterval;
 
 		void Update()
 		{
@@ -16,7 +18,7 @@ namespace Neuro_Knights
 		{
 			if (other.TryGetComponent(out Enemy enemy))
 			{
-				/// TODO: set enemy on fire
+				enemy.PlayBurnParticle(damage, burnDuration, burnInterval);
 			}
 		}
 	}

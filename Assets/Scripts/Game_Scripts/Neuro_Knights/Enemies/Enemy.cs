@@ -15,6 +15,7 @@ namespace Neuro_Knights
 		public HealthBar healthBar;
 		public Target target;
 		public ParticleSystem blood;
+		public ParticleSystem burn;
 
 		public LevelManager levelManager;
 		public Player player;
@@ -22,6 +23,8 @@ namespace Neuro_Knights
 		public bool isFollowing = false;
 
 		[SerializeField] private XP xP;
+
+		private int burnDamage = 0;
 
 		[Header("Walk Anim Variables")]
 		[SerializeField] private float xScaleAmount;
@@ -62,12 +65,14 @@ namespace Neuro_Knights
 
 			if (targetPos.x > 0)
 			{
-				transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+				// transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+				transform.localRotation = Quaternion.Euler(new Vector3(transform.localRotation.eulerAngles.x, 0, transform.localRotation.eulerAngles.z));
 			}
 
 			else if (targetPos.x < 0)
 			{
-				transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+				// transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+				transform.localRotation = Quaternion.Euler(new Vector3(transform.localRotation.eulerAngles.x, 180, transform.localRotation.eulerAngles.z));
 			}
 		}
 
@@ -82,6 +87,8 @@ namespace Neuro_Knights
 			health = Mathf.Clamp(health, 0f, maxHealth);
 
 			healthBar.SetHealth(health / maxHealth);
+
+			DamagePopup.Create(transform.position, damage);
 
 			if (health == 0)
 			{
@@ -104,6 +111,11 @@ namespace Neuro_Knights
 			return instantHealth;
 		}
 
+		public void TakeFireDamage()
+		{
+			TakeDamage(burnDamage);
+		}
+
 		public void PlayBloodParticle()
 		{
 			ParticleSystem spawnedParticle = Instantiate(blood, transform.position, Quaternion.identity);
@@ -112,6 +124,21 @@ namespace Neuro_Knights
 			Sequence sequence = DOTween.Sequence();
 			sequence.Append(spriteRenderer.DOColor(Color.red, 0.1f));
 			sequence.Append(spriteRenderer.DOColor(Color.white, 0.1f));
+		}
+
+		public void PlayBurnParticle(int burnDamage, float burnDuration, float burnInterval)
+		{
+			if (burn.gameObject.activeSelf) return;
+
+			burn.gameObject.SetActive(true);
+			this.burnDamage = burnDamage;
+			InvokeRepeating(nameof(TakeFireDamage), 0.1f, burnInterval);
+			Invoke(nameof(DisableBurnParticle), burnDuration);
+		}
+
+		public void DisableBurnParticle()
+		{
+			burn.gameObject.SetActive(false);
 		}
 
 		private void SpawnXP()

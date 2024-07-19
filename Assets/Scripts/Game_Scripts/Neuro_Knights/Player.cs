@@ -10,7 +10,6 @@ namespace Neuro_Knights
 		[SerializeField] private SpriteRenderer body;
 		[SerializeField] private SpriteRenderer cape;
 		[SerializeField] private float gunRadius;
-		[SerializeField] private int gunAmount;
 		[SerializeField] private Transform gunsTransform;
 		[SerializeField] private List<Weapon> weapons;
 		[SerializeField] private List<Weapon> spawnedGuns;
