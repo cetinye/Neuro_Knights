@@ -62,7 +62,7 @@ namespace Neuro_Knights
 			Enemy closestEnemy = GetClosestEnemy();
 
 			Bullet spawnedBullet = Instantiate(bullet, new Vector3(nozzle.position.x, nozzle.position.y, -1f), Quaternion.identity, nozzle.transform);
-			spawnedBullet.transform.localPosition = nozzle.transform.localPosition;
+			// spawnedBullet.transform.localPosition = nozzle.transform.localPosition;
 
 			CheckTarget(closestEnemy, damage);
 

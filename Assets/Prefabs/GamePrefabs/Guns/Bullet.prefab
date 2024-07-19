@@ -27,8 +27,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4114178423060961442}
   m_Father: {fileID: 0}
@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  speed: 20
+  speed: 10
   damage: 0
 --- !u!1001 &1508249054900292616
 PrefabInstance:
@@ -59,6 +59,18 @@ PrefabInstance:
     - target: {fileID: 3311869744898037606, guid: bd4b8fa3acc6ddd4b9a44541b3c17e52, type: 3}
       propertyPath: m_Name
       value: Bullet
+      objectReference: {fileID: 0}
+    - target: {fileID: 3311869744898282666, guid: bd4b8fa3acc6ddd4b9a44541b3c17e52, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3311869744898282666, guid: bd4b8fa3acc6ddd4b9a44541b3c17e52, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3311869744898282666, guid: bd4b8fa3acc6ddd4b9a44541b3c17e52, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3311869744898282666, guid: bd4b8fa3acc6ddd4b9a44541b3c17e52, type: 3}
       propertyPath: m_LocalPosition.x
@@ -99,6 +111,10 @@ PrefabInstance:
     - target: {fileID: 3311869744898282666, guid: bd4b8fa3acc6ddd4b9a44541b3c17e52, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3311869744898282666, guid: bd4b8fa3acc6ddd4b9a44541b3c17e52, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

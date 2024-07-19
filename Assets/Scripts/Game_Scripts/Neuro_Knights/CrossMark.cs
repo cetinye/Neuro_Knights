@@ -7,6 +7,8 @@ namespace Neuro_Knights
 {
 	public class CrossMark : MonoBehaviour
 	{
+		[SerializeField] private float minAlpha;
+		[SerializeField] private float timeForEachInterval;
 		private SpriteRenderer spriteRenderer;
 		private Tween fadeTween;
 		private bool isInterrupted = false;
@@ -27,7 +29,7 @@ namespace Neuro_Knights
 
 		public Tween AnimSequence()
 		{
-			fadeTween = spriteRenderer.DOFade(0.5f, 0.5f).SetLoops(6, LoopType.Yoyo).OnComplete(() => gameObject.SetActive(false));
+			fadeTween = spriteRenderer.DOFade(minAlpha, timeForEachInterval).SetLoops(6, LoopType.Yoyo).OnComplete(() => gameObject.SetActive(false));
 			return fadeTween;
 		}
 

@@ -54,7 +54,7 @@ namespace Neuro_Knights
 				}
 			}
 
-			transform.DORotate(new Vector3(0, 0, angle), 0.5f);
+			transform.DORotate(new Vector3(0, 0, angle), 0);
 		}
 
 		public Enemy GetClosestEnemy()

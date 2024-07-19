@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Neuro_Knights
@@ -10,10 +7,11 @@ namespace Neuro_Knights
 		[SerializeField] private Enemy target;
 		[SerializeField] private float speed;
 		[SerializeField] private float damage;
+		private bool isReadyToShoot = false;
 
 		void Update()
 		{
-			if (target != null)
+			if (isReadyToShoot && target != null)
 			{
 				transform.position = Vector2.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
 
@@ -24,10 +22,8 @@ namespace Neuro_Knights
 					Destroy(gameObject);
 				}
 			}
-			else
-			{
+			else if (isReadyToShoot && target == null)
 				Destroy(gameObject);
-			}
 		}
 
 		public void SetDamage(float damage)
@@ -38,6 +34,7 @@ namespace Neuro_Knights
 		public void SetTarget(Enemy enemy)
 		{
 			target = enemy;
+			isReadyToShoot = true;
 		}
 	}
 }
