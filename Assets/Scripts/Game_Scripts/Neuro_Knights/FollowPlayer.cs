@@ -9,10 +9,16 @@ namespace Neuro_Knights
 		[SerializeField] private Player player;
 		[SerializeField] private float xBound;
 		[SerializeField] private float yBound;
+		private Vector3 offset;
+
+		void Awake()
+		{
+			offset = transform.position;
+		}
 
 		void LateUpdate()
 		{
-			transform.position = new Vector3(Mathf.Clamp(player.transform.position.x, -xBound, xBound), Mathf.Clamp(player.transform.position.y, -yBound, yBound), -10f);
+			transform.position = new Vector3(Mathf.Clamp(player.transform.position.x + offset.x, -xBound, xBound), Mathf.Clamp(player.transform.position.y + offset.y, -yBound, yBound), -10f);
 		}
 	}
 }

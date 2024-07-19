@@ -61,12 +61,14 @@ namespace Neuro_Knights
 
 			if (direction.x > 0)
 			{
-				transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+				// body.transform.localRotation = Quaternion.Euler(new Vector3(body.transform.localRotation.eulerAngles.x, 180, body.transform.localRotation.eulerAngles.z));
+				cape.transform.localRotation = Quaternion.Euler(new Vector3(cape.transform.localRotation.eulerAngles.x, 180, cape.transform.localRotation.eulerAngles.z));
 			}
 
 			else if (direction.x < 0)
 			{
-				transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+				// body.transform.localRotation = Quaternion.Euler(new Vector3(body.transform.localRotation.eulerAngles.x, 0, body.transform.localRotation.eulerAngles.z));
+				cape.transform.localRotation = Quaternion.Euler(new Vector3(cape.transform.localRotation.eulerAngles.x, 0, cape.transform.localRotation.eulerAngles.z));
 			}
 		}
 
@@ -84,8 +86,8 @@ namespace Neuro_Knights
 			{
 				float angle = i * angleStep * Mathf.Deg2Rad;
 				Vector3 newPosition = new Vector3(
-					transform.position.x + Mathf.Cos(angle) * gunRadius,
-					transform.position.y + Mathf.Sin(angle) * gunRadius,
+					gunsTransform.position.x + Mathf.Cos(angle) * gunRadius,
+					gunsTransform.position.y + Mathf.Sin(angle) * gunRadius,
 					0
 				);
 
