@@ -56,6 +56,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FollowerEnemy_1
       objectReference: {fileID: 0}
+    - target: {fileID: 6281465985365405652, guid: 8f2fb4cb9470b9942a4df24c619a0ddc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.32
+      objectReference: {fileID: 0}
     - target: {fileID: 8638251092010140941, guid: 8f2fb4cb9470b9942a4df24c619a0ddc, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.35476
