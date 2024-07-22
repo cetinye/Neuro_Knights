@@ -50,7 +50,7 @@ MonoBehaviour:
   range: 3
   fireRate: 0.5
   muzzleFlash: {fileID: 245851125214993016, guid: cd2a02adc82d168418cf74cf6bb9c596, type: 3}
-  bullet: {fileID: 3789493625602568937, guid: 3d1f2705155dd5841bcd90a3fd39a445, type: 3}
+  bullet: {fileID: 2569131848958706858, guid: 3d1f2705155dd5841bcd90a3fd39a445, type: 3}
   trajectory: {fileID: 0}
   isReadyToShoot: 1
   nozzle: {fileID: 4238656596698670177}

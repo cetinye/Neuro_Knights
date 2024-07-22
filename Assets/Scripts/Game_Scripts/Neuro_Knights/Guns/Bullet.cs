@@ -32,7 +32,17 @@ namespace Neuro_Knights
 		public void SetDirection(Vector2 dir)
 		{
 			direction = dir;
+			transform.eulerAngles = new Vector3(0, 0, SetAngle(direction));
 			isMoveable = true;
+		}
+
+		private float SetAngle(Vector3 dir)
+		{
+			dir = dir.normalized;
+			float n = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+			if (n < 0) n += 360;
+
+			return n;
 		}
 	}
 }
