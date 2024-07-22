@@ -54,7 +54,8 @@ namespace Neuro_Knights
 				}
 			}
 
-			transform.DORotate(new Vector3(0, 0, angle), 0);
+			// transform.DORotate(new Vector3(0, 0, angle), 0);
+			transform.localRotation = Quaternion.Euler(new Vector3(0, 0, angle));
 		}
 
 		public Enemy GetClosestEnemy()
@@ -66,7 +67,7 @@ namespace Neuro_Knights
 			foreach (Enemy enemy in enemies)
 			{
 				// enemy.GetComponent<SpriteRenderer>().color = Color.white;
-				float distance = enemy.GetDistanceToPlayer();
+				float distance = enemy.GetDistanceFrom(transform.position);
 				if (distance < minDistance && enemy.GetInstantHealth() > 0)
 				{
 					minDistance = distance;
@@ -76,12 +77,6 @@ namespace Neuro_Knights
 
 			// closestEnemy.GetComponent<SpriteRenderer>().color = Color.red;
 			return closestEnemy;
-		}
-
-		public void CheckTarget(Enemy enemy, float damage)
-		{
-			if (enemy.GetInstantHealth() > 0)
-				enemy.InstantHealthDamage(damage);
 		}
 	}
 }

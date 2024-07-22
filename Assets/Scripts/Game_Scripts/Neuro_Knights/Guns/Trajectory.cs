@@ -4,9 +4,9 @@ namespace Neuro_Knights
 {
 	public class Trajectory : MonoBehaviour
 	{
-		[SerializeField] private Vector2 direction;
 		[SerializeField] private float speed;
 		[SerializeField] private float damage;
+		[SerializeField] private Vector2 direction;
 
 		private bool isMoveable = false;
 

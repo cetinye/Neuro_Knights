@@ -4,25 +4,24 @@ namespace Neuro_Knights
 {
 	public class Bullet : MonoBehaviour
 	{
-		[SerializeField] private Enemy target;
 		[SerializeField] private float speed;
 		[SerializeField] private float damage;
-		private bool isReadyToShoot = false;
+		[SerializeField] private Vector3 direction;
+		private bool isMoveable = false;
 
 		void Update()
 		{
-			if (isReadyToShoot && target != null)
-			{
-				transform.position = Vector2.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
+			if (isMoveable && GameStateManager.GetGameState() == GameState.Playing)
+				transform.position += speed * Time.deltaTime * direction.normalized;
+		}
 
-				if (Vector2.Distance(transform.position, target.transform.position) <= 0.1f)
-				{
-					target.TakeDamage(damage);
-					Destroy(gameObject);
-				}
-			}
-			else if (isReadyToShoot && target == null)
+		void OnTriggerEnter2D(Collider2D other)
+		{
+			if (other.gameObject.TryGetComponent(out Enemy enemy))
+			{
+				enemy.TakeDamage(damage);
 				Destroy(gameObject);
+			}
 		}
 
 		public void SetDamage(float damage)
@@ -30,10 +29,10 @@ namespace Neuro_Knights
 			this.damage = damage;
 		}
 
-		public void SetTarget(Enemy enemy)
+		public void SetDirection(Vector2 dir)
 		{
-			target = enemy;
-			isReadyToShoot = true;
+			direction = dir;
+			isMoveable = true;
 		}
 	}
 }

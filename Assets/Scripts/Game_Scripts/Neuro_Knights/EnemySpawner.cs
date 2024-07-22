@@ -12,7 +12,7 @@ namespace Neuro_Knights
 		[SerializeField] private List<Enemy> spawnedEnemies = new List<Enemy>();
 		[SerializeField] private CrossMark crossMark;
 		[SerializeField] private Collider2D spawnAreaCollider;
-		private int wave = 1;
+		private int wave = 4;
 		private float spawnInterval;
 
 		private LevelManager levelManager;
@@ -136,7 +136,7 @@ namespace Neuro_Knights
 					spawnInterval = 0.25f;
 					break;
 
-				// for testing delete
+				/// TODO: for testing delete
 				case 7:
 					spawnInterval = 0.1f;
 					break;

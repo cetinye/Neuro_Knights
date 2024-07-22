@@ -37,7 +37,6 @@ namespace Neuro_Knights
 		{
 			transform.position = Vector3.MoveTowards(transform.position, playerPosition, speed * Time.deltaTime);
 
-			Debug.LogError(distToPlayer);
 			if (distToPlayer <= 0.01f)
 			{
 				AudioManager.instance.PlayOneShot(SoundType.XPPickup);

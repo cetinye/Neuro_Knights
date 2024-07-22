@@ -28,7 +28,6 @@ namespace Neuro_Knights
 			if (GameStateManager.GetGameState() != GameState.Playing)
 				return;
 
-			LookAtEnemy();
 			Shoot();
 		}
 
@@ -50,6 +49,8 @@ namespace Neuro_Knights
 			if (isReadyToShoot)
 			{
 				isReadyToShoot = false;
+
+				LookAtEnemy();
 				PlayFireSound();
 				MuzzleFlash();
 				SpawnBullet();
@@ -61,13 +62,10 @@ namespace Neuro_Knights
 		{
 			Enemy closestEnemy = GetClosestEnemy();
 
-			Bullet spawnedBullet = Instantiate(bullet, new Vector3(nozzle.position.x, nozzle.position.y, -1f), Quaternion.identity, nozzle.transform);
-			// spawnedBullet.transform.localPosition = nozzle.transform.localPosition;
-
-			CheckTarget(closestEnemy, damage);
+			Bullet spawnedBullet = Instantiate(bullet, new Vector3(nozzle.position.x, nozzle.position.y, -0.5f), Quaternion.identity, nozzle.transform);
 
 			spawnedBullet.SetDamage(damage);
-			spawnedBullet.SetTarget(closestEnemy);
+			spawnedBullet.SetDirection(GetDirection());
 		}
 
 		public void ReadyToShoot()
@@ -81,6 +79,16 @@ namespace Neuro_Knights
 			spawnedParticle.transform.localPosition = Vector3.zero;
 			spawnedParticle.transform.rotation = Quaternion.Euler(new Vector3(-90f, 0f, 0f));
 			spawnedParticle.Play();
+		}
+
+		public Vector2 GetDirection()
+		{
+			Enemy enemy = GetClosestEnemy();
+
+			Vector2 direction = new Vector2(enemy.transform.position.x - nozzle.position.x,
+				enemy.transform.position.y - nozzle.position.y);
+
+			return direction;
 		}
 
 		private void PlayFireSound()

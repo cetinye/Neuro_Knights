@@ -81,6 +81,11 @@ namespace Neuro_Knights
 			return Vector2.Distance(transform.position, player.transform.position);
 		}
 
+		public float GetDistanceFrom(Vector3 position)
+		{
+			return Vector2.Distance(transform.position, position);
+		}
+
 		public void TakeDamage(float damage)
 		{
 			health -= damage;
