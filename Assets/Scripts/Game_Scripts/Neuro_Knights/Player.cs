@@ -9,14 +9,13 @@ namespace Neuro_Knights
 	{
 		[SerializeField] private SpriteRenderer body;
 		[SerializeField] private SpriteRenderer cape;
+		[SerializeField] private float xpPickupRange;
 		[SerializeField] private float gunRadius;
 		[SerializeField] private Transform gunsTransform;
 		[SerializeField] private List<Weapon> weapons;
 		[SerializeField] private List<Weapon> spawnedGuns;
-		[SerializeField] private List<Transform> weaponSlots;
 		[SerializeField] private float speed;
 		[SerializeField] private VariableJoystick variableJoystick;
-		[SerializeField] private Rigidbody2D rb;
 		[SerializeField] private float xBound;
 		[SerializeField] private float yBound;
 
@@ -97,6 +96,11 @@ namespace Neuro_Knights
 		public Vector2 GetPlayerPosition()
 		{
 			return transform.position;
+		}
+
+		public float GetPickupRange()
+		{
+			return xpPickupRange;
 		}
 
 		public Enemy GetClosestEnemy()

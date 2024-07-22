@@ -1,37 +1,56 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Neuro_Knights
 {
 	public class XP : MonoBehaviour
 	{
+		public float distToPlayer;
 		[SerializeField] private int xpAmount;
 		[SerializeField] private float speed;
 		private bool isCollected = false;
 		private Player player;
 
+		void Start()
+		{
+			player = LevelManager.instance.GetPlayer();
+		}
+
 		void Update()
 		{
-			if (isCollected && GameStateManager.GetGameState() == GameState.Playing)
-			{
-				transform.position = Vector2.MoveTowards(transform.position, LevelManager.instance.GetPlayer().GetPlayerPosition(), speed * Time.deltaTime);
+			if (GameStateManager.GetGameState() != GameState.Playing)
+				return;
 
-				if (Vector2.Distance(transform.position, LevelManager.instance.GetPlayer().GetPlayerPosition()) <= 0.1f)
-				{
-					AudioManager.instance.PlayOneShot(SoundType.XPPickup);
-					player.AddXP(xpAmount);
-					Destroy(gameObject);
-				}
+			Vector3 playerPosition = player.GetPlayerPosition();
+			distToPlayer = Vector2.Distance(transform.position, playerPosition);
+
+			if (isCollected)
+			{
+				MoveTowardsPlayer(playerPosition);
+			}
+			else
+			{
+				CheckIfCollectable(playerPosition);
 			}
 		}
 
-		void OnTriggerEnter2D(Collider2D other)
+		void MoveTowardsPlayer(Vector3 playerPosition)
 		{
-			if (other.TryGetComponent(out Player player) && !isCollected)
+			transform.position = Vector3.MoveTowards(transform.position, playerPosition, speed * Time.deltaTime);
+
+			Debug.LogError(distToPlayer);
+			if (distToPlayer <= 0.01f)
+			{
+				AudioManager.instance.PlayOneShot(SoundType.XPPickup);
+				player.AddXP(xpAmount);
+				Destroy(gameObject);
+			}
+		}
+
+		void CheckIfCollectable(Vector3 playerPosition)
+		{
+			if (distToPlayer <= player.GetPickupRange())
 			{
 				isCollected = true;
-				this.player = player;
 			}
 		}
 	}
