@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
@@ -21,6 +22,7 @@ namespace Neuro_Knights
 		public Player player;
 		public SpriteRenderer spriteRenderer;
 		public bool isFollowing = false;
+		public bool isPoisoned = false;
 
 		[SerializeField] private XP xP;
 
@@ -88,6 +90,8 @@ namespace Neuro_Knights
 
 		public void TakeDamage(float damage)
 		{
+			if (health <= 0) return;
+
 			health -= damage;
 			health = Mathf.Clamp(health, 0f, maxHealth);
 
@@ -163,5 +167,26 @@ namespace Neuro_Knights
 
 			walkSeq.SetLoops(-1, LoopType.Yoyo);
 		}
+
+		#region Poison
+
+		private float speedBackup;
+		public void Poisoned(float slowPower, float duration)
+		{
+			if (isPoisoned) return;
+
+			isPoisoned = true;
+			speedBackup = speed;
+			speed -= (speed * slowPower) / 100;
+			Invoke(nameof(DisablePoison), duration);
+		}
+
+		private void DisablePoison()
+		{
+			isPoisoned = false;
+			speed = speedBackup;
+		}
+
+		#endregion
 	}
 }
