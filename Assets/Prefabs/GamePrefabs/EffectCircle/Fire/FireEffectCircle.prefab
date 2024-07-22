@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2712576329153919414}
   - component: {fileID: 1787555763256721026}
   m_Layer: 0
-  m_Name: EffectCircle
+  m_Name: FireEffectCircle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2703249452184885358}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.19000001, y: -1.5300001, z: 0.015151515}
   m_LocalScale: {x: 3.7926614, y: 3.7926614, z: 3.7926614}
   m_ConstrainProportionsScale: 1

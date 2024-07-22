@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Neuro_Knights
 {
-	public class EffectCircle : MonoBehaviour
+	public class FireEffectCircle : MonoBehaviour
 	{
 		public int damage;
 		public int fireballCount;
