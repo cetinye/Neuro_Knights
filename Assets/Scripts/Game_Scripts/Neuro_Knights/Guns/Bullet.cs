@@ -11,6 +11,8 @@ namespace Neuro_Knights
 
 		void Update()
 		{
+			CheckOutOfBounds();
+
 			if (isMoveable && GameStateManager.GetGameState() == GameState.Playing)
 				transform.position += speed * Time.deltaTime * direction.normalized;
 		}
@@ -43,6 +45,12 @@ namespace Neuro_Knights
 			if (n < 0) n += 360;
 
 			return n;
+		}
+
+		private void CheckOutOfBounds()
+		{
+			if (transform.position.x > 15 || transform.position.x < -15 || transform.position.y > 15 || transform.position.y < -15)
+				Destroy(gameObject);
 		}
 	}
 }

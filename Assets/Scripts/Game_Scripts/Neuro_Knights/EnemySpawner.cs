@@ -12,7 +12,7 @@ namespace Neuro_Knights
 		[SerializeField] private List<Enemy> spawnedEnemies = new List<Enemy>();
 		[SerializeField] private CrossMark crossMark;
 		[SerializeField] private Collider2D spawnAreaCollider;
-		private int wave = 4;
+		private int wave = 3;
 		private float spawnInterval;
 
 		private LevelManager levelManager;
