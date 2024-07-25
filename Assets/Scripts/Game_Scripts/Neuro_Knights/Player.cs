@@ -7,13 +7,18 @@ namespace Neuro_Knights
 {
 	public class Player : MonoBehaviour
 	{
+		[SerializeField] private float health;
 		[SerializeField] private SpriteRenderer body;
 		[SerializeField] private SpriteRenderer cape;
 		[SerializeField] private float xpPickupRange;
+
+		[Header("Weapon Variables")]
 		[SerializeField] private float gunRadius;
 		[SerializeField] private Transform gunsTransform;
 		[SerializeField] private List<Weapon> weapons;
 		[SerializeField] private List<Weapon> spawnedGuns;
+
+		[Header("Movement Variables")]
 		[SerializeField] private float speed;
 		[SerializeField] private VariableJoystick variableJoystick;
 		[SerializeField] private float xBound;
@@ -25,6 +30,9 @@ namespace Neuro_Knights
 		[SerializeField] private float xScaleTime;
 		[SerializeField] private float yScaleTime;
 		private Sequence walkSeq;
+
+		[Header("Particles")]
+		[SerializeField] private ParticleSystem healParticle;
 
 		private LevelManager levelManager;
 		private float xpAmount;
@@ -122,6 +130,12 @@ namespace Neuro_Knights
 
 			// closestEnemy.GetComponent<SpriteRenderer>().color = Color.red;
 			return closestEnemy;
+		}
+
+		public void Heal(float amount)
+		{
+			health += amount;
+			healParticle.Play();
 		}
 
 		public void AddXP(float amount)
