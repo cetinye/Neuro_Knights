@@ -53,6 +53,11 @@ namespace Neuro_Knights
 			upgradePanel.SetActive(state);
 		}
 
+		public Transform GetUpgradePanel()
+		{
+			return upgradePanel.transform.GetChild(0);
+		}
+
 		public void SetCharacterSelectionPanel(bool state)
 		{
 			characterSelectionPanel.SetActive(state);

@@ -36,6 +36,11 @@ namespace Neuro_Knights
 		[Header("DamagePopup Variables")]
 		public DamagePopup damagePopupPrefab;
 
+		[Header("Upgrade Variables")]
+		[SerializeField] private int countForUpgrade;
+		[SerializeField] private Upgrade upgradePrefab;
+		[SerializeField] private List<UpgradeSO> upgrades = new List<UpgradeSO>();
+
 		[Header("Scene Object Variables")]
 		[SerializeField] private int objectAmount;
 		[SerializeField] private List<GameObject> objects = new List<GameObject>();
@@ -90,21 +95,25 @@ namespace Neuro_Knights
 			switch (GameStateManager.GetGameState())
 			{
 				case GameState.CharacterSelection:
+					RemoveUpgradeCards();
 					uiManager.SetCharacterSelectionPanel(true);
 					break;
 
 				case GameState.CapeSelection:
+					RemoveUpgradeCards();
 					uiManager.SetCharacterSelectionPanel(false);
 					uiManager.SetCapeSelectionPanel(true);
 					break;
 
 				case GameState.Start:
+					RemoveUpgradeCards();
 					uiManager.SetCapeSelectionPanel(false);
 					GameStateManager.SetGameState(GameState.Playing);
 					enemySpawner.SpawnEnemies();
 					break;
 
 				case GameState.Playing:
+					RemoveUpgradeCards();
 					uiManager.SetCharacterSelectionPanel(false);
 					uiManager.SetUpgradePanel(false);
 					isLevelTimerOn = true;
@@ -114,6 +123,7 @@ namespace Neuro_Knights
 				case GameState.Upgrade:
 					isLevelTimerOn = false;
 					isWaveTimerOn = false;
+					SpawnUpgradeCards();
 					uiManager.SetUpgradePanel(true);
 					break;
 			}
@@ -185,7 +195,7 @@ namespace Neuro_Knights
 			killedCount++;
 			uiManager.UpdateKilledText(killedCount);
 
-			if (killedCount % 10 == 0)
+			if (killedCount % countForUpgrade == 0)
 			{
 				GameStateManager.SetGameState(GameState.Upgrade);
 			}
@@ -197,6 +207,23 @@ namespace Neuro_Knights
 			{
 				GameObject chosenObj = objects[Random.Range(0, objects.Count)];
 				Instantiate(chosenObj, enemySpawner.GetRandomSpawnPos(false), Quaternion.identity, sceneTransform);
+			}
+		}
+
+		private void SpawnUpgradeCards()
+		{
+			for (int i = 0; i < 4; i++)
+			{
+				Upgrade spawnedUpgrade = Instantiate(upgradePrefab, uiManager.GetUpgradePanel(), false);
+				spawnedUpgrade.SetUpgrade(upgrades[UnityEngine.Random.Range(0, upgrades.Count)]);
+			}
+		}
+
+		private void RemoveUpgradeCards()
+		{
+			for (int i = 0; i < uiManager.GetUpgradePanel().childCount; i++)
+			{
+				Destroy(uiManager.GetUpgradePanel().GetChild(i).gameObject);
 			}
 		}
 	}
