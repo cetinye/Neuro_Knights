@@ -102,6 +102,7 @@ namespace Neuro_Knights
 			if (health == 0)
 			{
 				target.enabled = false;
+				walkSeq.Kill();
 				AudioManager.instance.PlayOneShot(SoundType.Death);
 				levelManager.GetEnemySpawner().RemoveEnemy(this);
 				PlayBloodParticle();
@@ -130,9 +131,9 @@ namespace Neuro_Knights
 			ParticleSystem spawnedParticle = Instantiate(blood, transform.position, Quaternion.identity);
 			spawnedParticle.gameObject.SetActive(true);
 
-			Sequence sequence = DOTween.Sequence();
-			sequence.Append(spriteRenderer.DOColor(Color.red, 0.1f));
-			sequence.Append(spriteRenderer.DOColor(Color.white, 0.1f));
+			// Sequence sequence = DOTween.Sequence();
+			// sequence.Append(spriteRenderer.DOColor(Color.red, 0.1f));
+			// sequence.Append(spriteRenderer.DOColor(Color.white, 0.1f));
 		}
 
 		public void PlayBurnParticle(int burnDamage, float burnDuration, float burnInterval)
