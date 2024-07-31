@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
@@ -25,6 +22,7 @@ namespace Neuro_Knights
 		public SpriteRenderer spriteRenderer;
 		public bool isFollowing = false;
 		public bool isPoisoned = false;
+		public bool isFrozen = false;
 
 		[SerializeField] private XP xP;
 
@@ -33,7 +31,6 @@ namespace Neuro_Knights
 		private float iceInitialScale;
 		private float walkInitialScale;
 		private float walkEndScale;
-		private bool isFrozen = false;
 
 		[Header("Walk Anim Variables")]
 		[SerializeField] private float xScaleAmount;

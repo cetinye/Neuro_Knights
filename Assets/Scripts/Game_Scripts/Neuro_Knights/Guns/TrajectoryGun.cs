@@ -6,11 +6,14 @@ namespace Neuro_Knights
 		{
 			if (isReadyToShoot)
 			{
-				// PlayFireSound();
-				// MuzzleFlash();
 				isReadyToShoot = false;
-				SpawnTrajectory();
+
+				Enemy parent = transform.parent.TryGetComponent<Enemy>(out parent) ? parent : null;
 				Invoke(nameof(ReadyToShoot), fireRate);
+
+				if (parent.isFrozen) return;
+
+				SpawnTrajectory();
 			}
 		}
 	}

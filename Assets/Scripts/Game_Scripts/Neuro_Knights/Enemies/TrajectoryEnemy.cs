@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Neuro_Knights
@@ -15,6 +13,7 @@ namespace Neuro_Knights
 			if (isFollowing && health > 0 && GameStateManager.GetGameState() == GameState.Playing)
 			{
 				distanceToPlayer = GetDistanceToPlayer();
+
 				LookAtPlayer();
 				Shoot();
 
@@ -26,7 +25,6 @@ namespace Neuro_Knights
 
 		public override void FollowPlayer()
 		{
-			// transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
 			transform.position = Vector3.MoveTowards(transform.position, new Vector3(player.transform.position.x, player.transform.position.y, -0.004f), speed * Time.deltaTime);
 		}
 
