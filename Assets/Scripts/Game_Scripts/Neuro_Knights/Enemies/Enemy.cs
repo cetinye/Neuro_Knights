@@ -11,12 +11,14 @@ namespace Neuro_Knights
 		public float speed;
 		public float distanceToPlayer;
 		public float health;
-		public float instantHealth; // health calculated before bullet hits
 		public float maxHealth;
 		public HealthBar healthBar;
 		public Target target;
 		public ParticleSystem blood;
 		public ParticleSystem burn;
+		public GameObject ice;
+		public float iceScaleDuration;
+		public float iceMeltDuration;
 
 		public LevelManager levelManager;
 		public Player player;
@@ -27,6 +29,11 @@ namespace Neuro_Knights
 		[SerializeField] private XP xP;
 
 		private int burnDamage = 0;
+		private float initialSpeed;
+		private float iceInitialScale;
+		private float walkInitialScale;
+		private float walkEndScale;
+		private bool isFrozen = false;
 
 		[Header("Walk Anim Variables")]
 		[SerializeField] private float xScaleAmount;
@@ -38,8 +45,10 @@ namespace Neuro_Knights
 		void Awake()
 		{
 			health = maxHealth;
-			instantHealth = health;
 			healthBar.SetHealth(health);
+
+			walkInitialScale = spriteRenderer.transform.localScale.x;
+			walkEndScale = spriteRenderer.transform.localScale.x + xScaleAmount;
 		}
 
 		public virtual void Start()
@@ -49,6 +58,8 @@ namespace Neuro_Knights
 			isFollowing = true;
 
 			WalkAnim();
+
+			iceInitialScale = ice.transform.localScale.x;
 		}
 
 		public virtual void FollowPlayer()
@@ -58,6 +69,8 @@ namespace Neuro_Knights
 
 		public void LookAtPlayer()
 		{
+			if (isFrozen) return;
+
 			Vector2 targetPos;
 
 			targetPos.x = player.transform.position.x - transform.position.x;
@@ -111,16 +124,6 @@ namespace Neuro_Knights
 			}
 		}
 
-		public void InstantHealthDamage(float damage)
-		{
-			instantHealth -= damage;
-		}
-
-		public float GetInstantHealth()
-		{
-			return instantHealth;
-		}
-
 		public void TakeFireDamage()
 		{
 			TakeDamage(burnDamage);
@@ -130,10 +133,6 @@ namespace Neuro_Knights
 		{
 			ParticleSystem spawnedParticle = Instantiate(blood, transform.position, Quaternion.identity);
 			spawnedParticle.gameObject.SetActive(true);
-
-			// Sequence sequence = DOTween.Sequence();
-			// sequence.Append(spriteRenderer.DOColor(Color.red, 0.1f));
-			// sequence.Append(spriteRenderer.DOColor(Color.white, 0.1f));
 		}
 
 		public void PlayBurnParticle(int burnDamage, float burnDuration, float burnInterval)
@@ -146,9 +145,35 @@ namespace Neuro_Knights
 			Invoke(nameof(DisableBurnParticle), burnDuration);
 		}
 
+		public void PlayIceParticle(int iceDamage, float iceDuration)
+		{
+			if (ice.activeSelf) return;
+
+			isFrozen = true;
+			ice.transform.localScale = Vector3.zero;
+			ice.SetActive(true);
+			ice.transform.DOScale(iceInitialScale, iceScaleDuration).SetEase(Ease.InOutCubic);
+			TakeDamage(iceDamage);
+			initialSpeed = speed;
+			speed = 0;
+			walkSeq.Kill(true);
+			Invoke(nameof(DisableIceParticle), iceDuration);
+		}
+
 		public void DisableBurnParticle()
 		{
 			burn.gameObject.SetActive(false);
+		}
+
+		public void DisableIceParticle()
+		{
+			ice.transform.DOScale(0, iceMeltDuration).SetEase(Ease.Linear).OnComplete(() =>
+			{
+				ice.SetActive(false);
+				isFrozen = false;
+				speed = initialSpeed;
+				WalkAnim();
+			});
 		}
 
 		private void SpawnXP()
@@ -163,8 +188,8 @@ namespace Neuro_Knights
 		{
 			walkSeq = DOTween.Sequence();
 
-			walkSeq.Append(spriteRenderer.transform.DOScaleX(spriteRenderer.transform.localScale.x + xScaleAmount, xScaleTime));
-			walkSeq.Join(spriteRenderer.transform.DOScaleY(spriteRenderer.transform.localScale.y - yScaleAmount, yScaleTime));
+			walkSeq.Append(spriteRenderer.transform.DOScaleX(walkEndScale, xScaleTime));
+			walkSeq.Join(spriteRenderer.transform.DOScaleY(walkInitialScale, yScaleTime));
 
 			walkSeq.SetLoops(-1, LoopType.Yoyo);
 		}

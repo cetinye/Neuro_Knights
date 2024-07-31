@@ -68,7 +68,7 @@ namespace Neuro_Knights
 			{
 				// enemy.GetComponent<SpriteRenderer>().color = Color.white;
 				float distance = enemy.GetDistanceFrom(transform.position);
-				if (distance < minDistance && enemy.GetInstantHealth() > 0)
+				if (distance < minDistance)
 				{
 					minDistance = distance;
 					closestEnemy = enemy;
