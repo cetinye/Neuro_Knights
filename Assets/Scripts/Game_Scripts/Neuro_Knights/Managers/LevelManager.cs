@@ -31,7 +31,6 @@ namespace Neuro_Knights
 
 		[Header("Enemy Spawner Variables")]
 		[SerializeField] private EnemySpawner enemySpawner;
-		// [SerializeField] private float spawnInterval;
 
 		[Header("DamagePopup Variables")]
 		public DamagePopup damagePopupPrefab;
@@ -39,7 +38,10 @@ namespace Neuro_Knights
 		[Header("Upgrade Variables")]
 		[SerializeField] private int countForUpgrade;
 		[SerializeField] private Upgrade upgradePrefab;
-		[SerializeField] private List<UpgradeSO> upgrades = new List<UpgradeSO>();
+		[SerializeField] private List<UpgradeSO> lvl1upgrades = new List<UpgradeSO>();
+		[SerializeField] private List<UpgradeSO> lvl2upgrades = new List<UpgradeSO>();
+		[SerializeField] private List<UpgradeSO> lvl3upgrades = new List<UpgradeSO>();
+		[SerializeField] private List<UpgradeSO> lvl4upgrades = new List<UpgradeSO>();
 
 		[Header("Scene Object Variables")]
 		[SerializeField] private int objectAmount;
@@ -212,10 +214,21 @@ namespace Neuro_Knights
 
 		private void SpawnUpgradeCards()
 		{
+			List<UpgradeSO> selectedUpgrades = new List<UpgradeSO>();
+			Upgrade spawnedUpgrade;
+			UpgradeSO selectedCard;
+
 			for (int i = 0; i < 4; i++)
 			{
-				Upgrade spawnedUpgrade = Instantiate(upgradePrefab, uiManager.GetUpgradePanel(), false);
-				spawnedUpgrade.SetUpgrade(upgrades[UnityEngine.Random.Range(0, upgrades.Count)]);
+				spawnedUpgrade = Instantiate(upgradePrefab, uiManager.GetUpgradePanel(), false);
+
+				do
+				{
+					selectedCard = lvl1upgrades[UnityEngine.Random.Range(0, lvl1upgrades.Count)];
+				} while (selectedUpgrades.Contains(selectedCard));
+
+				spawnedUpgrade.SetUpgrade(selectedCard);
+				selectedUpgrades.Add(selectedCard);
 			}
 		}
 

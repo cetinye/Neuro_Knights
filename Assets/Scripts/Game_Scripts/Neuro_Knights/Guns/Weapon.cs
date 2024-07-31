@@ -10,13 +10,86 @@ namespace Neuro_Knights
 		public float damage;
 		public float range;
 		public float fireRate;
+		public bool isReadyToShoot = true;
+		public Transform nozzle;
 		public ParticleSystem muzzleFlash;
 		public Bullet bullet;
 		public Trajectory trajectory;
+		private LevelManager levelManager;
+
+		void Awake()
+		{
+			isReadyToShoot = true;
+		}
+
+		void Start()
+		{
+			levelManager = LevelManager.instance;
+		}
+
+		void Update()
+		{
+			if (levelManager.GetSpawnedEnemies().Count == 0)
+				return;
+
+			if (GameStateManager.GetGameState() != GameState.Playing)
+				return;
+
+			Shoot();
+		}
 
 		public virtual void Fire()
 		{
 
+		}
+
+		private void Shoot()
+		{
+			Enemy closestEnemy = GetClosestEnemy();
+
+			if (closestEnemy != null)
+			{
+				if (closestEnemy.GetDistanceToPlayer() <= range)
+				{
+					Fire();
+				}
+			}
+		}
+
+		public void SpawnBullet()
+		{
+			Enemy closestEnemy = GetClosestEnemy();
+
+			Bullet spawnedBullet = Instantiate(bullet, new Vector3(nozzle.position.x, nozzle.position.y, -0.5f), Quaternion.identity, nozzle.transform);
+
+			spawnedBullet.SetDamage(damage);
+			spawnedBullet.SetDirection(GetDirectionToEnemy());
+		}
+
+		public void SpawnTrajectory()
+		{
+			Trajectory spawnedTrajectory = Instantiate(trajectory, new Vector3(transform.position.x, transform.position.y, -1f), Quaternion.identity, null);
+			spawnedTrajectory.SetDamage(damage);
+			spawnedTrajectory.SetDirection(GetDirectionToPlayer(), transform.position);
+		}
+
+		public void ReadyToShoot()
+		{
+			isReadyToShoot = true;
+		}
+
+		public void MuzzleFlash()
+		{
+			ParticleSystem spawnedParticle = Instantiate(muzzleFlash, Vector3.zero, Quaternion.Euler(new Vector3(-90f, 0f, 0f)), nozzle.transform);
+			spawnedParticle.transform.localPosition = Vector3.zero;
+			spawnedParticle.transform.rotation = Quaternion.Euler(new Vector3(-90f, 0f, 0f));
+			spawnedParticle.Play();
+		}
+
+		public void PlayFireSound()
+		{
+			AudioManager.instance.GetSoundSource(SoundType.PistolFire).pitch = 1 + Random.Range(-0.1f, 0.1f);
+			AudioManager.instance.PlayOneShot(SoundType.PistolFire);
 		}
 
 		public void LookAtEnemy()
@@ -77,6 +150,24 @@ namespace Neuro_Knights
 
 			// closestEnemy.GetComponent<SpriteRenderer>().color = Color.red;
 			return closestEnemy;
+		}
+
+		public Vector2 GetDirectionToEnemy()
+		{
+			Enemy enemy = GetClosestEnemy();
+
+			Vector2 direction = new Vector2(enemy.transform.position.x - nozzle.position.x,
+				enemy.transform.position.y - nozzle.position.y);
+
+			return direction;
+		}
+
+		public Vector2 GetDirectionToPlayer()
+		{
+			Vector2 direction = new Vector2(LevelManager.instance.GetPlayer().GetPlayerPosition().x - transform.position.x,
+				LevelManager.instance.GetPlayer().GetPlayerPosition().y - transform.position.y);
+
+			return direction;
 		}
 	}
 }

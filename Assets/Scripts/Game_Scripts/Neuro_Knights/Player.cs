@@ -80,7 +80,7 @@ namespace Neuro_Knights
 
 		public void SpawnGun()
 		{
-			spawnedGuns.Add(Instantiate(weapons[0], gunsTransform));
+			spawnedGuns.Add(Instantiate(weapons[UnityEngine.Random.Range(0, weapons.Count)], gunsTransform));
 			UpdateGunPositions();
 		}
 
