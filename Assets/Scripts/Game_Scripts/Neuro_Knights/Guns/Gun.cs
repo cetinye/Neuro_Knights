@@ -1,6 +1,6 @@
 namespace Neuro_Knights
 {
-	public class Pistol : Weapon
+	public class Gun : Weapon
 	{
 		public override void Fire()
 		{
