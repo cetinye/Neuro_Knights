@@ -4324,6 +4324,10 @@ MonoBehaviour:
   weapons:
   - {fileID: 1540430005723377348, guid: 3aab635933fd89e4cad9b42763de4d02, type: 3}
   - {fileID: 1540430005723377348, guid: ed60125bceb509446934b18dcfdc50e8, type: 3}
+  - {fileID: 1540430005723377348, guid: ed60125bceb509446934b18dcfdc50e8, type: 3}
+  - {fileID: 1540430005723377348, guid: ed60125bceb509446934b18dcfdc50e8, type: 3}
+  - {fileID: 1540430005723377348, guid: ed60125bceb509446934b18dcfdc50e8, type: 3}
+  - {fileID: 1540430005723377348, guid: ed60125bceb509446934b18dcfdc50e8, type: 3}
   spawnedGuns: []
   speed: 2
   variableJoystick: {fileID: 453609248}

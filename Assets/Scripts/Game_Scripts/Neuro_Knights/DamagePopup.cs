@@ -6,11 +6,15 @@ namespace Neuro_Knights
 {
 	public class DamagePopup : MonoBehaviour
 	{
+		private static float minRange = -0.25f;
+		private static float maxRange = 0.25f;
 		[SerializeField] private TMP_Text damageText;
 		private Sequence animSeq;
 
 		public static DamagePopup Create(Vector3 position, float damage)
 		{
+			position = new Vector3(position.x + UnityEngine.Random.Range(minRange, maxRange), position.y + UnityEngine.Random.Range(minRange, maxRange), position.z);
+
 			DamagePopup popup = Instantiate(LevelManager.instance.damagePopupPrefab, position, Quaternion.identity);
 			popup.SetText(damage);
 			popup.Anim();
