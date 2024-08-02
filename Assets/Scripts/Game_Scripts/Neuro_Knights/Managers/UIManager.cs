@@ -20,6 +20,12 @@ namespace Neuro_Knights
 		[SerializeField] private Slider xpSlider;
 		[SerializeField] private TMP_Text xpSliderLvlText;
 
+		[Header("Stats Variables")]
+		[SerializeField] private GameObject statsPanel;
+		[SerializeField] private Sprite redStatsIcon;
+		[SerializeField] private Sprite blueStatsIcon;
+		[SerializeField] private Image buttonImage;
+
 		[Header("Flash Variables")]
 		[SerializeField] private float flashInterval = 0.5f;
 		private Color defaultColor;
@@ -28,6 +34,26 @@ namespace Neuro_Knights
 		{
 			defaultColor = waveTimeText.color;
 		}
+
+		#region Stats
+
+		public void OpenStatsPanel()
+		{
+			bool state = !statsPanel.activeSelf;
+			statsPanel.SetActive(state);
+		}
+
+		public void SetStatIconRed()
+		{
+			buttonImage.sprite = redStatsIcon;
+		}
+
+		public void SetStatIconBlue()
+		{
+			buttonImage.sprite = blueStatsIcon;
+		}
+
+		#endregion
 
 		public void UpdateKilledText(int value)
 		{

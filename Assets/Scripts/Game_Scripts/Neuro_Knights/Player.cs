@@ -24,6 +24,9 @@ namespace Neuro_Knights
 		[SerializeField] private float xBound;
 		[SerializeField] private float yBound;
 
+		[Header("Effect Variables")]
+		[SerializeField] private Effect effect;
+
 		[Header("Walk Anim Variables")]
 		[SerializeField] private float xScaleAmount;
 		[SerializeField] private float yScaleAmount;
@@ -168,6 +171,11 @@ namespace Neuro_Knights
 		public void SetCape(Sprite newCape)
 		{
 			cape.sprite = newCape;
+		}
+
+		public void SetEffect(Effect effect)
+		{
+			this.effect = Instantiate(effect, cape.transform.position, Quaternion.identity, transform);
 		}
 
 		private void WalkAnim()
