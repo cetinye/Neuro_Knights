@@ -65,18 +65,13 @@ namespace Neuro_Knights
 				transform.position = new Vector3(Mathf.Clamp(transform.position.x, -xBound, xBound), Mathf.Clamp(transform.position.y, -yBound, yBound), -0.005f);
 			}
 
-			// if (direction.normalized != Vector3.zero)
-			// 	transform.up = direction.normalized;
-
 			if (direction.x > 0)
 			{
-				// body.transform.localRotation = Quaternion.Euler(new Vector3(body.transform.localRotation.eulerAngles.x, 180, body.transform.localRotation.eulerAngles.z));
 				cape.transform.localRotation = Quaternion.Euler(new Vector3(cape.transform.localRotation.eulerAngles.x, 180, cape.transform.localRotation.eulerAngles.z));
 			}
 
 			else if (direction.x < 0)
 			{
-				// body.transform.localRotation = Quaternion.Euler(new Vector3(body.transform.localRotation.eulerAngles.x, 0, body.transform.localRotation.eulerAngles.z));
 				cape.transform.localRotation = Quaternion.Euler(new Vector3(cape.transform.localRotation.eulerAngles.x, 0, cape.transform.localRotation.eulerAngles.z));
 			}
 		}
@@ -122,7 +117,6 @@ namespace Neuro_Knights
 
 			foreach (Enemy enemy in enemies)
 			{
-				// enemy.GetComponent<SpriteRenderer>().color = Color.white;
 				float distance = enemy.GetDistanceToPlayer();
 				if (distance < minDistance)
 				{
@@ -131,7 +125,6 @@ namespace Neuro_Knights
 				}
 			}
 
-			// closestEnemy.GetComponent<SpriteRenderer>().color = Color.red;
 			return closestEnemy;
 		}
 

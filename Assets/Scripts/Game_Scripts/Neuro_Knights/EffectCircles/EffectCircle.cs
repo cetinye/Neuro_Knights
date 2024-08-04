@@ -39,11 +39,11 @@ namespace Neuro_Knights
 				switch (effectType)
 				{
 					case EffectType.Fire:
-						enemy.PlayBurnParticle(damage, effectDuration, effectInterval);
+						enemy.Burn(damage, effectDuration, effectInterval);
 						break;
 
 					case EffectType.Ice:
-						enemy.PlayIceParticle(damage, effectDuration);
+						enemy.Freeze(damage, effectDuration);
 						break;
 				}
 			}

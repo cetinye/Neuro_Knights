@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 721948abf9023964192313c1fa307394, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effectType: 0
+  effectType: 1
   damage: 5
   ballCount: 3
   ballRadius: 0.8

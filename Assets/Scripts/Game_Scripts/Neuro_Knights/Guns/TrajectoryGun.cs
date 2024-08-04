@@ -8,7 +8,7 @@ namespace Neuro_Knights
 			{
 				isReadyToShoot = false;
 
-				Enemy parent = transform.parent.TryGetComponent<Enemy>(out parent) ? parent : null;
+				EffectComponent parent = transform.parent.TryGetComponent<EffectComponent>(out parent) ? parent : null;
 				Invoke(nameof(ReadyToShoot), fireRate);
 
 				if (parent.isFrozen) return;

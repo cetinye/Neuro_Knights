@@ -100,7 +100,6 @@ namespace Neuro_Knights
 			targetPos.x = closestEnemyPos.x - transform.position.x;
 			targetPos.y = closestEnemyPos.y - transform.position.y;
 			float angle = Mathf.Atan2(targetPos.y, targetPos.x) * Mathf.Rad2Deg;
-			// transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
 
 			if (angle > 0)
 			{
@@ -125,7 +124,6 @@ namespace Neuro_Knights
 				}
 			}
 
-			// transform.DORotate(new Vector3(0, 0, angle), 0);
 			transform.localRotation = Quaternion.Euler(new Vector3(0, 0, angle));
 		}
 
@@ -137,7 +135,6 @@ namespace Neuro_Knights
 
 			foreach (Enemy enemy in enemies)
 			{
-				// enemy.GetComponent<SpriteRenderer>().color = Color.white;
 				float distance = enemy.GetDistanceFrom(transform.position);
 				if (distance < minDistance)
 				{
@@ -146,7 +143,6 @@ namespace Neuro_Knights
 				}
 			}
 
-			// closestEnemy.GetComponent<SpriteRenderer>().color = Color.red;
 			return closestEnemy;
 		}
 

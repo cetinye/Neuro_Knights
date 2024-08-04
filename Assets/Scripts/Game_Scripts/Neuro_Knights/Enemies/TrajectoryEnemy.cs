@@ -4,36 +4,22 @@ namespace Neuro_Knights
 {
 	public class TrajectoryEnemy : Enemy
 	{
-		[SerializeField] private Weapon weapon;
-		[SerializeField] private float range;
-		[SerializeField] private float distanceToStop;
+		public TrajectoryMovementComponent movementComponent;
+		public Weapon weapon;
 
-		void Update()
+		void Awake()
 		{
-			if (isFollowing && health > 0 && GameStateManager.GetGameState() == GameState.Playing)
-			{
-				distanceToPlayer = GetDistanceToPlayer();
+			player = LevelManager.instance.GetPlayer();
 
-				LookAtPlayer();
-				Shoot();
-
-				if (distanceToPlayer < distanceToStop) return;
-
-				FollowPlayer();
-			}
+			healthComponent.Initialize(maxHealth);
+			movementComponent.Initialize(player, this);
+			animationComponent.Initialize(spriteRenderer, xScaleAmount, xScaleTime, yScaleTime);
+			effectComponent.Initialize(healthComponent, animationComponent, blood, burn, ice, iceScaleDuration, iceMeltDuration);
 		}
 
 		public override void FollowPlayer()
 		{
-			transform.position = Vector3.MoveTowards(transform.position, new Vector3(player.transform.position.x, player.transform.position.y, -0.004f), speed * Time.deltaTime);
-		}
-
-		private void Shoot()
-		{
-			if (Vector2.Distance(transform.position, player.GetPlayerPosition()) <= range)
-			{
-				weapon.Fire();
-			}
+			movementComponent.Movement();
 		}
 	}
 }

@@ -56,6 +56,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FollowerEnemy_1
       objectReference: {fileID: 0}
+    - target: {fileID: 6077066928284704167, guid: 8f2fb4cb9470b9942a4df24c619a0ddc, type: 3}
+      propertyPath: healthBar
+      value: 
+      objectReference: {fileID: 4308297718754233917}
     - target: {fileID: 6281465985365405652, guid: 8f2fb4cb9470b9942a4df24c619a0ddc, type: 3}
       propertyPath: m_LocalPosition.y
       value: -1.32
@@ -117,3 +121,14 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f2fb4cb9470b9942a4df24c619a0ddc, type: 3}
+--- !u!114 &4308297718754233917 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8553853487677178220, guid: 8f2fb4cb9470b9942a4df24c619a0ddc, type: 3}
+  m_PrefabInstance: {fileID: 5584254216958168913}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9804f5fdb774494d92fbef3d1961889, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

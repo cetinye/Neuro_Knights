@@ -102,8 +102,12 @@ GameObject:
   - component: {fileID: 480543103995835412}
   - component: {fileID: 223225463176109737}
   - component: {fileID: 2595971513342931365}
+  - component: {fileID: 6077066928284704167}
+  - component: {fileID: 4772688650759504700}
+  - component: {fileID: 6088899678501508171}
+  - component: {fileID: 7488442194207248659}
   m_Layer: 0
-  m_Name: FollowerEnemy
+  m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -141,27 +145,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fdf4d9eeb6e69e40aa140c6cfcf5e77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1.5
-  distanceToPlayer: 0
-  health: 100
   maxHealth: 100
   healthBar: {fileID: 8553853487677178220}
-  target: {fileID: 2595971513342931365}
+  spriteRenderer: {fileID: 73189273691852605}
   blood: {fileID: 813891302667791273}
   burn: {fileID: 1153925971748621581}
   ice: {fileID: 8574494000622764113}
   iceScaleDuration: 0.5
   iceMeltDuration: 0.5
-  levelManager: {fileID: 0}
-  player: {fileID: 0}
-  spriteRenderer: {fileID: 73189273691852605}
-  isFollowing: 0
-  isPoisoned: 0
-  xP: {fileID: 588122311847561396, guid: 0b16c9b6e50f321478e6fab3d645e2d0, type: 3}
+  speed: 1.5
   xScaleAmount: 0.2
-  yScaleAmount: 0.2
   xScaleTime: 0.75
   yScaleTime: 0.75
+  xp: {fileID: 588122311847561396, guid: 0b16c9b6e50f321478e6fab3d645e2d0, type: 3}
+  player: {fileID: 0}
+  healthComponent: {fileID: 6077066928284704167}
+  movementComponent: {fileID: 4772688650759504700}
+  animationComponent: {fileID: 6088899678501508171}
+  effectComponent: {fileID: 7488442194207248659}
 --- !u!50 &480543103995835412
 Rigidbody2D:
   serializedVersion: 4
@@ -241,6 +242,63 @@ MonoBehaviour:
   needArrowIndicator: 1
   needDistanceText: 0
   indicator: {fileID: 0}
+--- !u!114 &6077066928284704167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4254018369297605974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21908be5d7ce36f498e5eccceb3ef451, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  maxHealth: 100
+  healthBar: {fileID: 8553853487677178220}
+--- !u!114 &4772688650759504700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4254018369297605974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45a5ac5b471c13543ba94e047c41bc73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 2
+--- !u!114 &6088899678501508171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4254018369297605974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39f6625cbcac3a949a4d5605bda577f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7488442194207248659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4254018369297605974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac0dfbfb05d6b124b806586c221ba143, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blood: {fileID: 813891302667791273}
+  burn: {fileID: 1153925971748621581}
+  ice: {fileID: 8574494000622764113}
+  isPoisoned: 0
+  isFrozen: 0
 --- !u!1 &5220002126808295619
 GameObject:
   m_ObjectHideFlags: 0

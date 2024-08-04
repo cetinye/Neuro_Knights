@@ -199,10 +199,11 @@ MonoBehaviour:
   damage: 10
   range: 3
   fireRate: 1
+  isReadyToShoot: 1
+  nozzle: {fileID: 0}
   muzzleFlash: {fileID: 0}
   bullet: {fileID: 0}
   trajectory: {fileID: 5400086980476376959, guid: 1c9221c45bbf9fb4eb70b4ea65b1fa3b, type: 3}
-  isReadyToShoot: 1
 --- !u!1 &4588815504318164165
 GameObject:
   m_ObjectHideFlags: 0
@@ -474,6 +475,10 @@ GameObject:
   - component: {fileID: 7263560637505337503}
   - component: {fileID: 393122538427500125}
   - component: {fileID: 7199787535491466108}
+  - component: {fileID: 8889257277919678255}
+  - component: {fileID: 6247708561740922142}
+  - component: {fileID: 3178276046364045489}
+  - component: {fileID: 8565154832650359783}
   m_Layer: 0
   m_Name: TrajectoryEnemy
   m_TagString: Untagged
@@ -514,30 +519,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d94a0370941e3c4ead9417f094116b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1.5
-  distanceToPlayer: 0
-  health: 100
   maxHealth: 100
   healthBar: {fileID: 1525917692060981577}
-  target: {fileID: 7199787535491466108}
+  spriteRenderer: {fileID: 5610276208524930886}
   blood: {fileID: 4136915546434166008}
   burn: {fileID: 4271237195336708365}
   ice: {fileID: 5994170262313084952}
   iceScaleDuration: 0.5
   iceMeltDuration: 0.5
-  levelManager: {fileID: 0}
-  player: {fileID: 0}
-  spriteRenderer: {fileID: 5610276208524930886}
-  isFollowing: 0
-  isPoisoned: 0
-  xP: {fileID: 588122311847561396, guid: 0b16c9b6e50f321478e6fab3d645e2d0, type: 3}
+  speed: 1.5
   xScaleAmount: 0.2
-  yScaleAmount: 0.2
   xScaleTime: 0.75
   yScaleTime: 0.75
+  xp: {fileID: 588122311847561396, guid: 0b16c9b6e50f321478e6fab3d645e2d0, type: 3}
+  player: {fileID: 0}
+  healthComponent: {fileID: 8889257277919678255}
+  animationComponent: {fileID: 6247708561740922142}
+  effectComponent: {fileID: 3178276046364045489}
+  movementComponent: {fileID: 8565154832650359783}
   weapon: {fileID: 2265451038944239221}
-  range: 3
-  distanceToStop: 2.5
 --- !u!50 &7263560637505337503
 Rigidbody2D:
   serializedVersion: 4
@@ -617,6 +617,63 @@ MonoBehaviour:
   needArrowIndicator: 1
   needDistanceText: 0
   indicator: {fileID: 0}
+--- !u!114 &8889257277919678255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6428343354250772713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21908be5d7ce36f498e5eccceb3ef451, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  maxHealth: 100
+  healthBar: {fileID: 1525917692060981577}
+--- !u!114 &6247708561740922142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6428343354250772713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39f6625cbcac3a949a4d5605bda577f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3178276046364045489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6428343354250772713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac0dfbfb05d6b124b806586c221ba143, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blood: {fileID: 4136915546434166008}
+  burn: {fileID: 4271237195336708365}
+  ice: {fileID: 5994170262313084952}
+  isPoisoned: 0
+  isFrozen: 0
+--- !u!114 &8565154832650359783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6428343354250772713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0b6290d0e7a9634eb3c69ac874216f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 2
 --- !u!1 &7068751734148850185
 GameObject:
   m_ObjectHideFlags: 0
