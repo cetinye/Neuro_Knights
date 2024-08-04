@@ -32,6 +32,7 @@ namespace Neuro_Knights
 
 			animSeq.Append(transform.DOScale(Vector3.one * 1.5f, 0.5f));
 			animSeq.Append(damageText.DOFade(0, 0.5f));
+			animSeq.OnComplete(() => Destroy(gameObject));
 		}
 	}
 }

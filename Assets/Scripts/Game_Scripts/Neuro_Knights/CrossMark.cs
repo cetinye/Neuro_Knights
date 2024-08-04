@@ -29,7 +29,7 @@ namespace Neuro_Knights
 
 		public Tween AnimSequence()
 		{
-			fadeTween = spriteRenderer.DOFade(minAlpha, timeForEachInterval).SetLoops(6, LoopType.Yoyo).OnComplete(() => gameObject.SetActive(false));
+			fadeTween = spriteRenderer.DOFade(minAlpha, timeForEachInterval).SetLoops(6, LoopType.Yoyo).OnComplete(() => Destroy(gameObject));
 			return fadeTween;
 		}
 
