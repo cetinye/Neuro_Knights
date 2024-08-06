@@ -197,10 +197,10 @@ namespace Neuro_Knights
 			killedCount++;
 			uiManager.UpdateKilledText(killedCount);
 
-			if (killedCount % countForUpgrade == 0)
-			{
-				GameStateManager.SetGameState(GameState.Upgrade);
-			}
+			// if (killedCount % countForUpgrade == 0)
+			// {
+			// 	GameStateManager.SetGameState(GameState.Upgrade);
+			// }
 		}
 
 		private void PopulateSceneWObjects()

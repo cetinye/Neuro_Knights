@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Neuro_Knights
@@ -9,6 +10,8 @@ namespace Neuro_Knights
 		[SerializeField] private float speed;
 		private bool isCollected = false;
 		private Player player;
+
+		public static event Action<float> onXPPickup;
 
 		void Start()
 		{
@@ -29,7 +32,7 @@ namespace Neuro_Knights
 			}
 			else
 			{
-				CheckIfCollectable(playerPosition);
+				CheckIfCollectable();
 			}
 		}
 
@@ -40,12 +43,12 @@ namespace Neuro_Knights
 			if (distToPlayer <= 0.1f)
 			{
 				AudioManager.instance.PlayOneShot(SoundType.XPPickup);
-				player.AddXP(xpAmount);
+				onXPPickup?.Invoke(xpAmount);
 				Destroy(gameObject);
 			}
 		}
 
-		void CheckIfCollectable(Vector3 playerPosition)
+		void CheckIfCollectable()
 		{
 			if (distToPlayer <= player.GetPickupRange())
 			{

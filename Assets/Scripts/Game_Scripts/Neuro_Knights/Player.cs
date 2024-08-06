@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
@@ -37,6 +38,8 @@ namespace Neuro_Knights
 		[Header("Particles")]
 		[SerializeField] private ParticleSystem healParticle;
 
+		public static event Action onLevelUp;
+
 		private LevelManager levelManager;
 		private float xpAmount;
 		private int xpLevel = 1;
@@ -44,6 +47,9 @@ namespace Neuro_Knights
 		void Start()
 		{
 			levelManager = LevelManager.instance;
+
+			XP.onXPPickup += OnXPPickup;
+			onLevelUp += OnLevelUp;
 
 			WalkAnim();
 		}
@@ -134,21 +140,28 @@ namespace Neuro_Knights
 			healParticle.Play();
 		}
 
-		public void AddXP(float amount)
+		public void OnXPPickup(float amount)
 		{
 			xpAmount += amount / xpLevel;
 
 			if (xpAmount >= 100)
 			{
-				AudioManager.instance.PlayOneShot(SoundType.LevelUp);
-				xpLevel++;
-				levelManager.uiManager.FillAndSetExcessXP((xpAmount - 100) / 100);
-				xpAmount -= 100;
+				onLevelUp?.Invoke();
 			}
 			else
 			{
 				levelManager.uiManager.SetXpSlider(xpAmount / 100);
 			}
+		}
+
+		public void OnLevelUp()
+		{
+			xpLevel++;
+			AudioManager.instance.PlayOneShot(SoundType.LevelUp);
+			levelManager.uiManager.FillAndSetExcessXP((xpAmount - 100) / 100);
+			xpAmount -= 100;
+
+			GameStateManager.SetGameState(GameState.Upgrade);
 		}
 
 		public int GetXPLevel()
